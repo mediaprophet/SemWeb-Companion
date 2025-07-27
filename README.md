@@ -22,10 +22,18 @@ npm install
 npm run dev
 ```
 
-### Build for Production
+
+### Build for Chrome or Firefox
+To build the extension for Chrome:
 ```sh
-npm run build
+node build.js chrome
 ```
+To build the extension for Firefox:
+```sh
+node build.js firefox
+```
+
+The output will be in `dist/chrome` or `dist/firefox` respectively. Load the appropriate folder as an unpacked extension in your browser.
 
 ### Run Tests
 ```sh

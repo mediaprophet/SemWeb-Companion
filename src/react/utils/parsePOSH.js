@@ -1,80 +1,10 @@
+import { NAMESPACES } from '../../config';
+
 // POSH (Plain Old Semantic HTML) parser for Structured Data Sniffer (modern, no jQuery)
 // Extracts semantic metadata from HTML head/meta/link/title/img and outputs triples or normalized JSON
 // Usage: import parsePOSH from './parsePOSH';
 
-const PREFIXES = {
-  xhv: "http://www.w3.org/1999/xhtml/vocab#",
-  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-  rdfs: "http://www.w3.org/2000/01/rdf-schema#",
-  owl: "http://www.w3.org/2002/07/owl#",
-  xsd: "http://www.w3.org/2001/XMLSchema#",
-  skos: "http://www.w3.org/2004/02/skos/core#",
-  dct: "http://purl.org/dc/terms/",
-  dcterms: "http://purl.org/dc/terms/",
-  foaf: "http://xmlns.com/foaf/0.1/",
-  schema: "https://schema.org/",
-  dbpedia: "http://dbpedia.org/resource/",
-  dbp: "http://dbpedia.org/property/",
-  dbo: "http://dbpedia.org/ontology/",
-  wikidata: "http://www.wikidata.org/entity/",
-  wd: "http://www.wikidata.org/entity/",
-  wdt: "http://www.wikidata.org/prop/direct/",
-  prov: "http://www.w3.org/ns/prov#",
-  geo: "http://www.opengis.net/ont/geosparql#",
-  geonames: "http://www.geonames.org/ontology#",
-  void: "http://rdfs.org/ns/void#",
-  cc: "http://creativecommons.org/ns#",
-  org: "http://www.w3.org/ns/org#",
-  gr: "http://purl.org/goodrelations/v1#",
-  bibo: "http://purl.org/ontology/bibo/",
-  vcard: "http://www.w3.org/2006/vcard/ns#",
-  doap: "http://usefulinc.com/ns/doap#",
-  event: "http://purl.org/NET/c4dm/event.owl#",
-  fabio: "http://purl.org/spar/fabio/",
-  frbr: "http://purl.org/vocab/frbr/core#",
-  oa: "http://www.w3.org/ns/oa#",
-  sdo: "https://schema.org/",
-  skosxl: "http://www.w3.org/2008/05/skos-xl#",
-  bio: "http://purl.org/vocab/bio/0.1/",
-  sioc: "http://rdfs.org/sioc/ns#",
-  doac: "http://ramonantonio.net/doac/0.1/",
-  gn: "http://www.geonames.org/ontology#",
-  qb: "http://purl.org/linked-data/cube#",
-  vann: "http://purl.org/vocab/vann/",
-  voaf: "http://purl.org/vocommons/voaf#",
-  wgs84_pos: "http://www.w3.org/2003/01/geo/wgs84_pos#",
-  wdrs: "http://www.w3.org/2007/05/powder-s#",
-  opltw: "http://www.openlinksw.com/schemas/twitter#",
-  schema: "https://schema.org/",
-  schemavideo: "https://schema.org/VideoObject#",
-  formats: "http://www.w3.org/ns/formats/",
-  geo: "http://www.w3.org/2003/01/geo/wgs84_pos#",
-  foaf: "http://xmlns.com/foaf/0.1/",
-  dc: "http://purl.org/dc/elements/1.1/",
-  dct: "http://purl.org/dc/terms/",
-  sioc: "http://rdfs.org/sioc/ns#",
-  sioca: "http://rdfs.org/sioc/access#",
-  siocact: "http://rdfs.org/sioc/actions#",
-  siocarg: "http://rdfs.org/sioc/argument#",
-  siocquot: "http://rdfs.org/sioc/quotes#",
-  siocserv: "http://rdfs.org/sioc/services#",
-  siocswan: "http://rdfs.org/sioc/swan#",
-  sioctypes: "http://rdfs.org/sioc/types#",
-  siocwikitalk: "http://rdfs.org/sioc/wikitalk#",
-  cc: "http://creativecommons.org/ns#",
-  vc: "http://www.w3.org/2006/vcard/ns#",
-  as: "https://www.w3.org/ns/activitystreams#",
-  ical: "http://www.w3.org/2002/12/cal/ical#",
-  mee: "http://www.w3.org/ns/pim/meeting#",
-  mo: "http://purl.org/ontology/mo/",
-  rlog: "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/rlog#",
-  time: "http://www.w3.org/2006/time#",
-  tzont: "http://www.w3.org/2006/timezone#",
-  wf: "http://www.w3.org/2005/01/wf/flow#",
-  wgs84_pos: "http://www.w3.org/2003/01/geo/wgs84_pos#",
-  elements: "http://purl.org/dc/elements/1.1/",
-  terms: "http://purl.org/dc/terms/",
-};
+
 
 // Map meta/link names to RDF predicates (extended)
 const META_MAP = {
@@ -130,7 +60,6 @@ const META_MAP = {
   'sioc:about': { p: 'sioc:about', o: 'iri:content' },
   'sioc:has_creator': { p: 'sioc:has_creator', o: 'val:content' },
   'sioc:content': { p: 'sioc:content', o: 'val:content' },
-  // WDRS
   'wdrs:describedby': { p: 'wdrs:describedby', o: 'iri:content' },
 };
 
@@ -244,7 +173,7 @@ function parsePOSH(doc, baseURI) {
     triples.push({ s: src + '#this', p: 'schema:url', o: src });
   });
 
-  return { triples, links, prefixes: PREFIXES };
+  return { triples, links, prefixes: NAMESPACES };
 }
 
 export default parsePOSH;
