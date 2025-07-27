@@ -1,0 +1,30 @@
+{
+  "@context": {
+    "dc": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "schema": "http://schema.org/",
+    "osds": "https://github.com/OpenLinkSoftware/OSDS_extension#"
+  },
+  "@id": "osds:StructuredDataSniffer",
+  "@type": ["schema:SoftwareApplication", "foaf:Project"],
+  "schema:name": "OpenLink Structured Data Sniffer",
+  "schema:description": "A browser extension that reveals and visualizes structured metadata (Microdata, RDFa, JSON-LD, Turtle, etc.) embedded within HTML documents. Modernized with React, TypeScript, and advanced data visualization.",
+  "schema:featureList": [
+    "Detects and visualizes Microdata, JSON-LD, Turtle, RDFa, RDF/XML, POSH, JSON, and CSV",
+    "Interactive graph and table views (React Flow)",
+    "Accessible, internationalized UI",
+    "Settings sync via browser storage",
+    "Automated tests and CI"
+  ],
+  "schema:license": {
+    "@id": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+    "schema:name": "GNU General Public License v2.0"
+  },
+  "dc:creator": {
+    "@id": "https://www.openlinksw.com/",
+    "foaf:name": "OpenLink Software"
+  },
+  "schema:softwareVersion": "2025.07.27",
+  "schema:url": "https://github.com/OpenLinkSoftware/OSDS_extension",
+  "schema:dateModified": "2025-07-27"
+}

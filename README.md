@@ -1,40 +1,62 @@
-# Deprecated Repository for OpenLink Structured Data Sniffer
 
-## Please refer to [the new primary repository for this extension](https://github.com/OpenLinkSoftware/OSDS_extension).
+# OpenLink Structured Data Sniffer
 
-*This respository is primarily focused on developers.  You may want to also look 
-at [the more user-/consumer-focused site](http://osds.openlinksw.com/).*
+A browser extension that reveals structured metadata (Microdata, RDFa, JSON-LD, Turtle, etc.) embedded within HTML documents. Modernized with React, TypeScript, and advanced data visualization.
 
-## Intro
+## Features
+- Detects and visualizes Microdata, JSON-LD, Turtle, RDFa, RDF/XML, POSH, JSON, and CSV
+- Interactive graph and table views (React Flow)
+- Accessible, internationalized UI
+- Settings sync via browser storage
+- Automated tests and CI
 
-The OpenLink Structured Data Sniffer (OSDS) is a plugin for 
-[Google Chrome](http://www.google.com/chrome/browser/),
-[Mozilla Firefox](http://www.mozilla.org/firefox/), and 
-[Opera](http://www.opera.com/)
-web browsers, that detects and shows structured data embedded in web pages 
-in any of the following formats:
+## Getting Started
 
-- **JSON-LD**
-- **Microdata**
-- **RDFa**
-- **Turtle**
+### Prerequisites
+- Node.js 18 or later
+- npm
 
-Support for additional browsers like
-[Apple Safari](http://www.apple.com/safari/) and
-[Microsoft Edge](https://www.microsoft.com/microsoft-edge)
-is under construction.
+### Install & Run (Development)
+```sh
+npm install
+npm run dev
+```
+
+### Build for Production
+```sh
+npm run build
+```
+
+### Run Tests
+```sh
+npm test
+```
+
+## Code Style
+- TypeScript (in progress)
+- Prettier and ESLint for formatting and linting
+
+## Contributing
+Pull requests are welcome! Please:
+- Follow code style guidelines
+- Add/maintain tests
+- Document new features
 
 ## License
 Copyright 2015-2021 [OpenLink Software](mailto:opensource@openlinksw.com)
 
-This software is licensed under the GNU General Public License (see
-[COPYING](https://github.com/OpenLinkSoftware/OSDS_extension/blob/develop/COPYING)).
+This software is licensed under the GNU General Public License (see [COPYING](https://github.com/OpenLinkSoftware/OSDS_extension/blob/develop/COPYING)).
 
 **Note**: the only valid version of the GPL license as far as this project is concerned is the
 original **GNU General Public License Version 2**, dated June 1991.
 
+---
 
-## Deployment
+For more, see the [plan.json](./plan.json) for the full modernization roadmap.
+
+---
+
+## Legacy Info & Deployment
 
 Stable and/or signed releases may be deployed from 
 [the Chrome store](https://chrome.google.com/webstore/detail/openlink-structured-data/egdaiaihbdoiibopledjahjaihbmjhdj) 
@@ -49,7 +71,6 @@ Clone the sources from github using the following commands:
 ```shell
 $ cd src
 $ git clone https://github.com/OpenLinkSoftware/OSDS_extension
-
 ```
 which will automatically download the latest develop branch.
 
@@ -64,7 +85,6 @@ or directly from one of the following links:
 - [latest development .tar.gz](https://github.com/OpenLinkSoftware/OSDS_extension/archive/develop.tar.gz)
 - [latest development .zip](https://github.com/OpenLinkSoftware/OSDS_extension/archive/develop.zip)
 
-
 ### Install the extension in Chrome
 
 To install this extension manually in Chrome, use the following steps:
@@ -75,7 +95,6 @@ To install this extension manually in Chrome, use the following steps:
 - Choose the option **Load unpacked extension...**
 - Navigate to the folder containing the extracted source code
 - Press the **Select** button
-
 
 ### Install the extension in Opera
 
@@ -92,7 +111,7 @@ To install this extension manually in Opera, use the following steps:
 
 NOTE: Recent versions of Firefox only permit temporary installation of the unsigned `.xpi` file.  The latest 
 signed extension, which may lag a bit behind the unsigned, can be permanently installed from the 
-[Mozilla Add-ons catalog(https://addons.mozilla.org/en-US/firefox/addon/openlink-structured-data-sniff/).
+[Mozilla Add-ons catalog](https://addons.mozilla.org/en-US/firefox/addon/openlink-structured-data-sniff/).
 
 To install this extension manually in Firefox, use the following steps:
 
@@ -104,7 +123,6 @@ file and extract the unsigned `.xpi` file.
 - Click on **Load Temporary Add-on**
 - Navigate to the directory where you extracted the OSDS_FF.xpi file, select this file and press the
 **Open** button
-
 
 ### Examples
 Navigate to a page containing structured data such as:

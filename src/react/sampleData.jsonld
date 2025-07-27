@@ -1,0 +1,15 @@
+{
+  "@context": {
+    "name": "http://schema.org/name",
+    "knows": "http://schema.org/knows",
+    "Person": "http://schema.org/Person"
+  },
+  "@id": "http://example.org/alice",
+  "@type": "Person",
+  "name": "Alice",
+  "knows": {
+    "@id": "http://example.org/bob",
+    "@type": "Person",
+    "name": "Bob"
+  }
+}

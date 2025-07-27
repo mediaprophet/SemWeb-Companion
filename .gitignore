@@ -1,0 +1,15 @@
+node_modules
+
+dist/
+old-version_osds/
+old-version_osds.zip
+old_modules.zip
+plan.json
+prepare_chrome.sh
+prepare_ff.sh
+status.json
+summary_of_changes.md
+updatejobs copy.json
+updatejobs.json
+chromeerrors.md
+package-lock.json

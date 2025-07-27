@@ -1,0 +1,60 @@
+/* osds-animations.css: Micro-interactions and animation styles for OSDS React UI */
+
+.osds-animated-btn {
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+.osds-animated-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px #0074d933;
+}
+.osds-animated-btn:hover, .osds-animated-btn:focus {
+  background: #e6f2fb;
+  box-shadow: 0 2px 12px #0074d922;
+}
+
+.osds-toast {
+  position: fixed;
+  bottom: 2.5em;
+  right: 2.5em;
+  background: #222;
+  color: #fff;
+  padding: 1em 1.5em;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px #0005;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 1.05em;
+  animation: osds-toast-in 0.3s forwards, osds-toast-out 0.3s 2.2s forwards;
+}
+@keyframes osds-toast-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes osds-toast-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.osds-tab-transition {
+  transition: opacity 0.25s, transform 0.25s;
+  opacity: 1;
+}
+.osds-tab-transition-exit {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.osds-table-row-anim {
+  transition: background 0.18s;
+}
+.osds-table-row-anim:hover {
+  background: #f0f8ff;
+}
+
+.osds-icon-anim {
+  transition: transform 0.18s;
+}
+.osds-icon-anim:active {
+  transform: scale(0.88) rotate(-8deg);
+}

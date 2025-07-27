@@ -1,12 +1,13 @@
 {
-  "name": "OpenLink Structured Data Sniffer",
-  "short_name": "osds",
-  "author":"OpenLink Software",
-  "homepage_url": "http://osds.openlinksw.com/",
-  "version": "2.19.25",
+  "name": "Structured Data Sniffer (Community Fork)",
+  "short_name": "SDS Fork",
+  "author": "Structured Data Sniffer Community",
+  "homepage_url": "https://github.com/mediaprophet/structured-data-sniffer",
+  "version": "3.0.0.1",
+  "forked_from": "OpenLink Software / osds",
   "manifest_version": 2,
   "minimum_chrome_version": "18",
-  "description": "Reveals structured metadata (Microdata, RDFa, JSON-LD, Turtle, etc.) embedded within HTML documents.",
+  "description": "Explore, preview, and export all structured data (JSON-LD, Microdata, RDFa, Turtle, CSV, and more) embedded in web pages. Designed for the Web of Data and Social Web, with rich previews, sharing, accessibility, and developer tools.",
   "applications": {
     "gecko": {
       "id": "osds@openlinksw.com"
@@ -21,9 +22,6 @@
     "default_title": "Show Document Metadata",
     "default_popup": "panel.html"
   },
-  "background": {
-    "page": "background.html"
-  },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
@@ -31,7 +29,7 @@
   "content_scripts": [
     {
       "matches": ["file:///*/*","*://*/*"],
-      "js": ["lib/jquery-3.1.0.min.js", "lib/microdatajs/jquery.microdata.js", "lib/microdatajs/jquery.microdata.json.js", "lib/RDFa.js", "lib/n3-browser.js", "lib/jquery.mark.js", "lib/namespace.js", "lib/posh.js", "utils.js", "helpers_ui.js", "browser.js", "settings.js", "sniffer.js"],
+  "js": ["lib/RDFa.js", "lib/n3-browser.js", "lib/namespace.js", "lib/posh.js", "utils.js", "helpers_ui.js", "browser.js", "settings.js", "sniffer.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
     },
