@@ -1,7 +1,107 @@
+// Utility: Convert triples to a graph structure for visualization
+function triplesToGraph(triples) {
+  const nodes = [];
+  const edges = [];
+  const nodeSet = new Set();
+  triples.forEach(({ s, p, o }, idx) => {
+    if (!nodeSet.has(s)) {
+      nodes.push({ id: s, label: s });
+      nodeSet.add(s);
+    }
+    if (!nodeSet.has(o)) {
+      nodes.push({ id: o, label: o });
+      nodeSet.add(o);
+    }
+    edges.push({ id: `e${idx}`, source: s, target: o, label: p });
+  });
+  return { nodes, edges };
+}
+// Supported data types for detection and normalization
+const DATA_TYPES = [
+  { key: 'jsonld', label: 'JSON-LD' },
+  { key: 'csv', label: 'CSV' },
+  { key: 'turtle', label: 'Turtle/N3' },
+  { key: 'rdfxml', label: 'RDF/XML' },
+  { key: 'posh', label: 'POSH' },
+  // Add more types as needed
+];
+
 // Utility: check if a string is an IRI
 function isIRI(str) {
   return typeof str === 'string' && /^https?:\/\//.test(str);
-} // <-- Add this closing brace
+}
+
+// --- Triple normalization utility ---
+// Returns array of { s, p, o, [lang], [datatype] }
+function normalizeTriples(type, data, csvMapping, metaMapping) {
+  // JSON-LD
+  if (type === 'jsonld' && data) {
+    // Try to flatten @graph or array
+    let arr = [];
+    if (Array.isArray(data)) arr = data;
+    else if (data['@graph']) arr = data['@graph'];
+    else arr = [data];
+    // Extract triples
+    const triples = [];
+    arr.forEach(item => {
+      const subj = item['@id'] || '_:b0';
+      Object.entries(item).forEach(([p, v]) => {
+        if (p === '@id' || p === '@type' || p === '@context') return;
+        if (Array.isArray(v)) {
+          v.forEach(obj => {
+            if (typeof obj === 'object' && obj['@value'] !== undefined) {
+              triples.push({ s: subj, p, o: obj['@value'], lang: obj['@language'], datatype: obj['@type'] });
+            } else if (typeof obj === 'object' && obj['@id']) {
+              triples.push({ s: subj, p, o: obj['@id'] });
+            } else {
+              triples.push({ s: subj, p, o: obj });
+            }
+          });
+        } else if (typeof v === 'object' && v['@value'] !== undefined) {
+          triples.push({ s: subj, p, o: v['@value'], lang: v['@language'], datatype: v['@type'] });
+        } else if (typeof v === 'object' && v['@id']) {
+          triples.push({ s: subj, p, o: v['@id'] });
+        } else {
+          triples.push({ s: subj, p, o: v });
+        }
+      });
+    });
+    return triples;
+  }
+  // CSV
+  if (type === 'csv' && typeof data === 'string') {
+    // Simple CSV to triples: each row is a subject, columns are predicates
+    const lines = data.split(/\r?\n/).filter(Boolean);
+    if (lines.length < 2) return [];
+    const headers = lines[0].split(',');
+    return lines.slice(1).map((row, i) => {
+      const values = row.split(',');
+      return headers.map((h, j) => ({
+        s: `_:row${i}`,
+        p: h.trim(),
+        o: values[j] ? values[j].trim() : ''
+      }));
+    }).flat();
+  }
+  // Turtle/N3
+  if (type === 'turtle' && Array.isArray(data)) {
+    // Each line is a triple: subj pred obj .
+    return data
+      .map(line => {
+        const m = line.match(/^(\S+)\s+(\S+)\s+(.+)\s*\.$/);
+        if (!m) return null;
+        return { s: m[1], p: m[2], o: m[3].replace(/\"/g, '"') };
+      })
+      .filter(Boolean);
+  }
+  // RDF/XML (not parsed here, handled elsewhere)
+  if (type === 'rdfxml' && Array.isArray(data)) {
+    // Not supported in this utility; handled by parseRDFXML elsewhere
+    return [];
+  }
+  // Fallback: return empty array
+  return [];
+}
 
 // Utility: fetch and preview IRI content
 async function fetchIRIContent(url) {
@@ -71,133 +171,14 @@ function importFrameFactory(setJsonldFramed, setJsonldFrame) {
   };
 }
 import React, { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSettings } from './SettingsContext.jsx';
+import { useReactTable, getCoreRowModel, getFilteredRowModel } from '@tanstack/react-table';
 import RichPreview from './RichPreview';
 import { serializeRDFXML } from '../utils/parsers';
 import { parseRDFXML } from '../utils/parsers';
-import { useTranslation } from 'react-i18next';
-import LocalSparqlTab from './LocalSparqlTab';
-import { useSettings } from './SettingsContext';
-import parsePOSH from './utils/parsePOSH';
-import jsonld from 'jsonld';
-import Papa from '../utils/papaparse';
-import { useTable, useResizeColumns, useFlexLayout, useFilters } from 'react-table';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import ReactFlow, { Background, Controls, useReactFlow } from 'reactflow';
 
-
-const DATA_TYPES = [
-  { key: 'jsonld', label: 'JSON-LD', msg: { type: 'GET_JSONLD' }, help: 'Linked Data in JSON format' },
-  { key: 'microdata', label: 'Microdata', msg: { type: 'GET_MICRODATA' }, help: 'HTML5 Microdata embedded in the page' },
-  { key: 'turtle', label: 'Turtle', msg: { type: 'GET_TURTLE' }, help: 'RDF Turtle syntax' },
-  { key: 'rdfa', label: 'RDFa', msg: { type: 'GET_RDFA' }, help: 'RDFa attributes in HTML' },
-  { key: 'rdfxml', label: 'RDF/XML', msg: { type: 'GET_RDFXML' }, help: 'RDF/XML embedded data' },
-  { key: 'posh', label: 'POSH', msg: { type: 'GET_POSH' }, help: 'Plain Old Semantic HTML' },
-  { key: 'json', label: 'JSON', msg: { type: 'GET_JSON' }, help: 'Generic JSON data' },
-  { key: 'csv', label: 'CSV', msg: { type: 'GET_CSV' }, help: 'Comma-separated values' },
-];
-
-function fallbackFetch(key) {
-  // fallback to sample files if not running as extension
-  const map = {
-    jsonld: './sampleData.jsonld',
-    // Add more sample files as needed
-  };
-  return map[key] ? fetch(map[key]).then(r => r.json()) : Promise.resolve(null);
-}
-
-
-// --- Normalizers for each data type ---
-function normalizeTriples(type, data, csvMapping = {}, metaMapping = {}) {
-  if (!data) return [];
-  // JSON-LD
-  if (type === 'jsonld') {
-    const triples = [];
-    if (data['@id']) {
-      if (data.name) triples.push([data['@id'], 'name', data.name]);
-      if (data.knows && data.knows['@id']) {
-        triples.push([data['@id'], 'knows', data.knows['@id']]);
-        if (data.knows.name) triples.push([data.knows['@id'], 'name', data.knows.name]);
-      }
-    }
-    return triples;
-  }
-  // Microdata (assume microdatajs.get() format)
-  if (type === 'microdata' && data && data.items) {
-    const triples = [];
-    data.items.forEach(item => {
-      const subj = item.id || item.type || 'item';
-      Object.entries(item.properties || {}).forEach(([pred, objs]) => {
-        const mappedPred = metaMapping[pred] || pred;
-        objs.forEach(obj => triples.push([subj, mappedPred, typeof obj === 'object' ? JSON.stringify(obj) : obj]));
-      });
-    });
-    return triples;
-  }
-  // POSH: use the new parser if type is 'posh' and data is a Document
-  if (type === 'posh' && data && typeof window !== 'undefined' && data instanceof Document) {
-    const { triples } = parsePOSH(data, data.baseURI || window.location.href);
-    // Convert to [s,p,o] array
-    return triples.map(t => [t.s, metaMapping[t.p] || t.p, t.o]);
-  }
-  // CSV: advanced parsing with delimiter detection, quoted field handling, and type inference
-  if (type === 'csv' && typeof data === 'string') {
-    const result = Papa.parse(data, {
-      header: true,
-      dynamicTyping: true,
-      skipEmptyLines: true,
-      delimiter: '', // auto-detect
-      quoteChar: '"',
-    });
-    if (result.errors && result.errors.length > 0) {
-      // fallback: try without header
-      const fallback = Papa.parse(data, {
-        header: false,
-        dynamicTyping: true,
-        skipEmptyLines: true,
-        delimiter: '',
-        quoteChar: '"',
-      });
-      return fallback.data.map(row => row.map(cell => String(cell)));
-    }
-    // Convert rows to triples: [row, column, value], apply mapping
-    return result.data.flatMap((row, i) => Object.entries(row).map(([col, val]) => [`row${i+1}`, csvMapping[col] || col, val]));
-  }
-  // Turtle, RDFa, RDF/XML: treat as array of N-Triples
-  if (['turtle','rdfa','rdfxml'].includes(type) && Array.isArray(data)) {
-    return data.flatMap(line => {
-      const m = line.match(/^\s*([\S]+)\s+([\S]+)\s+(.+?)\s*\.?$/);
-      return m ? [[m[1], m[2], m[3]]] : [];
-    });
-  }
-  // JSON: treat as key-value pairs
-  if (type === 'json' && typeof data === 'object' && !Array.isArray(data)) {
-    return Object.entries(data).map(([k,v]) => ['root', metaMapping[k] || k, typeof v === 'object' ? JSON.stringify(v) : v]);
-  }
-  return [];
-}
-
-function triplesToGraph(triples) {
-  const nodes = [], edges = [], nodeMap = {};
-  let x = 100, y = 100, dx = 220;
-  function addNode(id, label) {
-    if (!nodeMap[id]) {
-      nodeMap[id] = true;
-      nodes.push({ id, position: { x, y }, data: { label } });
-      x += dx;
-    }
-  }
-  triples.forEach(([s,p,o],i) => {
-    addNode(s, s);
-    addNode(o, o);
-    edges.push({ id: `e${i}`, source: s, target: o, label: p });
-  });
-  return { nodes, edges };
-}
-
-
-
+// ...existing code...
 export default function DataView() {
   const { t } = useTranslation();
   // State for RDF/XML import results
@@ -582,48 +563,42 @@ export default function DataView() {
     else if (isIRI(edge.target)) handleIriClick(edge.target);
   };
 
+
+  // --- TanStack Table setup ---
   const columns = useMemo(() => [
     {
-      Header: t('subject', 'Subject'),
-      accessor: '0',
-      Cell: ({ value }) => isIRI(value)
-        ? <a href="#" onClick={e => { e.preventDefault(); handleIriClick(value); }} style={{ color: '#0074d9', textDecoration: 'underline' }}>{value}</a>
-        : value,
-      Filter: ({ column: { filterValue, setFilter } }) => (
-        <input value={filterValue || ''} onChange={e => setFilter(e.target.value || undefined)} placeholder={t('filter', 'Filter...')} style={{ width: '100%' }} />
-      ),
+      header: t('subject', 'Subject'),
+      accessorKey: '0',
+      cell: info => isIRI(info.getValue())
+        ? <a href="#" onClick={e => { e.preventDefault(); handleIriClick(info.getValue()); }} style={{ color: '#0074d9', textDecoration: 'underline' }}>{info.getValue()}</a>
+        : info.getValue(),
+      filterFn: 'includesString',
     },
     {
-      Header: t('predicate', 'Predicate'),
-      accessor: '1',
-      Cell: ({ value }) => isIRI(value)
-        ? <a href="#" onClick={e => { e.preventDefault(); handleIriClick(value); }} style={{ color: '#0074d9', textDecoration: 'underline' }}>{value}</a>
-        : value,
-      Filter: ({ column: { filterValue, setFilter } }) => (
-        <input value={filterValue || ''} onChange={e => setFilter(e.target.value || undefined)} placeholder={t('filter', 'Filter...')} style={{ width: '100%' }} />
-      ),
+      header: t('predicate', 'Predicate'),
+      accessorKey: '1',
+      cell: info => isIRI(info.getValue())
+        ? <a href="#" onClick={e => { e.preventDefault(); handleIriClick(info.getValue()); }} style={{ color: '#0074d9', textDecoration: 'underline' }}>{info.getValue()}</a>
+        : info.getValue(),
+      filterFn: 'includesString',
     },
     {
-      Header: t('object', 'Object'),
-      accessor: '2',
-      Cell: ({ value }) => isIRI(value)
-        ? <a href="#" onClick={e => { e.preventDefault(); handleIriClick(value); }} style={{ color: '#0074d9', textDecoration: 'underline' }}>{value}</a>
-        : value,
-      Filter: ({ column: { filterValue, setFilter } }) => (
-        <input value={filterValue || ''} onChange={e => setFilter(e.target.value || undefined)} placeholder={t('filter', 'Filter...')} style={{ width: '100%' }} />
-      ),
+      header: t('object', 'Object'),
+      accessorKey: '2',
+      cell: info => isIRI(info.getValue())
+        ? <a href="#" onClick={e => { e.preventDefault(); handleIriClick(info.getValue()); }} style={{ color: '#0074d9', textDecoration: 'underline' }}>{info.getValue()}</a>
+        : info.getValue(),
+      filterFn: 'includesString',
     },
   ], [t]);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    setFilter,
-    state: tableState
-  } = useTable({ columns, data: tableData }, useFilters, useResizeColumns, useFlexLayout);
+  const table = useReactTable({
+    data: tableData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {},
+  });
 
   // --- Drag and drop handlers ---
   const onDragEnd = result => {
@@ -663,6 +638,20 @@ export default function DataView() {
     }
     closeDialog();
   };
+
+  // --- Table rendering with TanStack Table ---
+  // Filtering UI for each column
+  function FilterInput({ column }) {
+    const columnFilterValue = column.getFilterValue() || '';
+    return (
+      <input
+        value={columnFilterValue}
+        onChange={e => column.setFilterValue(e.target.value)}
+        placeholder={t('filter', 'Filter...')}
+        style={{ width: '100%' }}
+      />
+    );
+  }
 
   // Helper: file type icon
   function getFileIcon(type) {

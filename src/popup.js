@@ -1,3 +1,19 @@
+// Debug: Global error and promise rejection handlers
+window.addEventListener('error', function(event) {
+  console.error('[Global Error]', event.message, 'at', event.filename + ':' + event.lineno + ':' + event.colno, event.error);
+});
+window.addEventListener('unhandledrejection', function(event) {
+  console.error('[Unhandled Promise Rejection]', event.reason);
+});
+console.log('[DEBUG] popup.js loaded at', new Date().toISOString());
+// Global error handler for debugging
+window.addEventListener('error', function(event) {
+  console.error('[Global Error]', event.message, 'at', event.filename + ':' + event.lineno + ':' + event.colno, event.error);
+});
+window.addEventListener('unhandledrejection', function(event) {
+  console.error('[Unhandled Promise Rejection]', event.reason);
+});
+console.log('[DEBUG] popup.js loaded at', new Date().toISOString());
 // popup.js
 
 document.addEventListener('DOMContentLoaded', () => {

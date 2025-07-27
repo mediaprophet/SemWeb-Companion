@@ -1,5 +1,10 @@
+
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSettings } from './SettingsContext.jsx';
 import { useSolidAuth } from './solid/SolidAuthProvider.jsx';
 import AlertMessage from './AlertMessage.jsx';
+import ConfirmModal from './ConfirmModal.jsx';
 
 
 function SparqlTab() {

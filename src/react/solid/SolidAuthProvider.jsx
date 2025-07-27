@@ -6,6 +6,7 @@ import {
   getDefaultSession,
   fetch as solidFetch
 } from "@inrupt/solid-client-authn-browser";
+export default SolidAuthProvider;
 
 const SolidAuthContext = createContext();
 
@@ -101,6 +102,7 @@ export function SolidAuthProvider({ children }) {
         putResource
       }}
     >
+  export default SolidAuthProvider;
       {children}
     </SolidAuthContext.Provider>
   );

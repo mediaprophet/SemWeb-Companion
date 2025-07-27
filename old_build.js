@@ -1,6 +1,17 @@
+// 6. Copy popup.js and background.js if present (after all other build steps)
+(() => {
+  const extraScripts = ['popup.js', 'background.js'];
+  for (const script of extraScripts) {
+    const src = path.resolve(__dirname, 'src', script);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, path.join(distDir, script));
+      console.log(`Copied ${script} to build output.`);
+    }
+  }
+})();
+
 // build.js: Cross-platform build/export script for OSDS extension (React modernized)
 // Usage: node build.js [chrome|firefox]
-
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
@@ -134,7 +145,7 @@ for (const [key, value] of Object.entries(replacements)) {
 fs.writeFileSync(path.join(distDir, 'manifest.json'), manifestTemplate);
 
 // 4. Copy static assets (images, lib, etc.)
-const staticDirs = ['images', 'lib', 'css'];
+const staticDirs = ['images', 'lib'];
 for (const dir of staticDirs) {
   const src = path.resolve(__dirname, 'src', dir);
   if (fs.existsSync(src)) copyRecursive(src, path.join(distDir, dir));
@@ -146,18 +157,6 @@ for (const file of extraFiles) {
   const src = path.resolve(__dirname, file);
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(distDir, file));
 }
-
-// 6. Copy popup.js and background.js if present (after all other build steps)
-(() => {
-  const extraScripts = ['popup.js', 'background.js'];
-  for (const script of extraScripts) {
-    const src = path.resolve(__dirname, 'src', script);
-    if (fs.existsSync(src)) {
-      fs.copyFileSync(src, path.join(distDir, script));
-      console.log(`Copied ${script} to build output.`);
-    }
-  }
-})();
 
 console.log(`\nBuild complete: ${distDir}\n`);
 console.log('You can now load this folder as an unpacked extension in your browser.');

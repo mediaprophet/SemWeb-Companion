@@ -10,7 +10,9 @@ import SuperLinksTab from './SuperLinksTab.jsx';
 import SuperLinksDemo from './SuperLinksDemo.jsx';
 import DataView from './DataView.jsx';
 import Tabs from './Tabs.jsx';
-import './osds-animations.css';
+
+import SolidAuthProvider from './solid/SolidAuthProvider.jsx';
+import SolidLoginPanel from './SolidLoginPanel.jsx';
 
 export default function App() {
   const { t, i18n } = useTranslation();

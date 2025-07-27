@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DataFactory, Store, Parser } from 'n3';
-import { Engine } from 'sparql-engine';
+import * as $rdf from 'rdflib';
 
 export default function LocalSparqlTab({ triples }) {
   const { t } = useTranslation();
@@ -10,11 +9,12 @@ export default function LocalSparqlTab({ triples }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Convert triples to N3 Store
+
+  // Convert triples to rdflib.js Store
   function triplesToStore(triples) {
-    const store = new Store();
+    const store = $rdf.graph();
     triples.forEach(([s, p, o]) => {
-      store.addQuad(DataFactory.namedNode(s), DataFactory.namedNode(p), DataFactory.literal(o));
+      store.add($rdf.sym(s), $rdf.sym(p), $rdf.literal(o));
     });
     return store;
   }
@@ -25,15 +25,16 @@ export default function LocalSparqlTab({ triples }) {
     setResults(null);
     try {
       const store = triplesToStore(triples);
-      const engine = new Engine(store);
-      const resultStream = await engine.execute(query);
-      const rows = [];
-      resultStream.on('data', row => rows.push(row));
-      resultStream.on('end', () => setResults(rows));
-      resultStream.on('error', err => setError(err.message));
+      const queryService = $rdf.SPARQLToQuery(query, false, store);
+      const resultsArr = [];
+      store.query(queryService, result => {
+        resultsArr.push(result);
+      }, undefined, () => {
+        setResults(resultsArr);
+        setLoading(false);
+      });
     } catch (e) {
       setError(e.message);
-    } finally {
       setLoading(false);
     }
   };
