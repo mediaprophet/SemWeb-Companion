@@ -131,12 +131,11 @@ function SuperLinksTab() {
         <div className="alert alert-warning mb-2">{t('solidLoginRequired', 'Solid login required for this endpoint.')}</div>
       )}
       <h4 id="superlinks-heading">{t('superLinks', 'SuperLinks')}</h4>
-      {/* Sidebar enhancements: Addressbook, Semantic Bookmarks, Annotations */}
+      {/* Sidebar enhancements: Addressbook, Annotations */}
       <div className="mb-3 d-flex gap-2 flex-column align-items-stretch" style={{ maxWidth: 320 }}>
         <div className="d-flex gap-2">
           <button className="btn btn-outline-info btn-sm" type="button" disabled title={t('comingSoon', 'Coming soon')}>{t('addressbook', 'Addressbook')}</button>
         </div>
-        <SemanticBookmarksSidebar />
         <AnnotationsSidebar />
         {/* Solid Chat appears only if logged in */}
         {isLoggedIn && <SolidChatSidebar />}

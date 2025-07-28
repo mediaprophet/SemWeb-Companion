@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as dataUtils from './utils/dataUtils';
 import parsePOSH from './utils/parsePOSH';
@@ -8,6 +7,42 @@ import { useSettings } from './SettingsContext.jsx';
 export default function UtilsTab() {
   const { t } = useTranslation();
   const { get, set } = useSettings();
+  const [importResult, setImportResult] = useState(null);
+  const fileInputRef = useRef();
+
+  // Import bookmarks.html and convert to semantic bookmarks
+  function handleBookmarkImport(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = evt => {
+      try {
+        const html = evt.target.result;
+        // Parse bookmarks from HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        // Chrome/Firefox bookmarks: <A HREF="...">label</A>
+        const links = Array.from(doc.querySelectorAll('a[href]'));
+        const semanticBookmarks = links.map(a => ({
+          url: a.getAttribute('href'),
+          label: a.textContent || a.getAttribute('href'),
+        }));
+        // Save to localStorage (merge with existing)
+        let existing = [];
+        try { existing = JSON.parse(localStorage.getItem('semanticBookmarks')) || []; } catch {}
+        const merged = [...existing, ...semanticBookmarks].reduce((acc, b) => {
+          if (!acc.find(x => x.url === b.url)) acc.push(b);
+          return acc;
+        }, []);
+        localStorage.setItem('semanticBookmarks', JSON.stringify(merged));
+        setImportResult({ count: semanticBookmarks.length, mergedCount: merged.length });
+      } catch (err) {
+        setImportResult({ error: err.message });
+      }
+    };
+    reader.readAsText(file);
+  }
+
   // Example usage of utilities
   const sampleTriples = [
     { s: 'http://example.org/a', p: 'http://example.org/b', o: 'http://example.org/c' },
@@ -53,85 +88,117 @@ export default function UtilsTab() {
       <div className="utils-tab p-4">
         <h4>{t('utils', 'Utilities')}</h4>
 
-              {/* SuperLinks Query Settings UI moved from SuperLinksTab */}
-              <section className="mb-4">
-                <h5>{t('superLinksQuerySettings', 'SuperLinks Query Settings')}</h5>
-                {/* ...existing settings code... */}
-                <div className="mb-3 row">
-                  <div className="col-12 fw-bold">{t('sparqlQuery', 'SPARQL Query:')}</div>
-                  <div className="col-12" style={{ position: 'relative', display: 'flex', alignItems: 'stretch' }}>
-                    {/* Line numbers */}
-                    <div style={{
-                      background: '#f8f9fa',
-                      color: '#888',
-                      textAlign: 'right',
-                      padding: '8px 6px',
-                      borderRadius: '4px 0 0 4px',
-                      userSelect: 'none',
-                      fontFamily: 'monospace',
-                      fontSize: 13,
-                      minWidth: 32,
-                      border: '1px solid #ced4da',
-                      borderRight: 'none',
-                      height: 220,
-                      overflow: 'hidden',
-                      lineHeight: '1.5',
-                    }}>
-                      {sparqlLines.map((_, i) => (
-                        <div key={i}>{i + 1}</div>
-                      ))}
-                    </div>
-                    {/* Textarea */}
-                    <textarea
-                      className="form-control"
-                      style={{
-                        width: '100%',
-                        height: 220,
-                        whiteSpace: 'pre',
-                        borderRadius: '0 4px 4px 0',
-                        borderLeft: 'none',
-                        fontFamily: 'monospace',
-                        fontSize: 13,
-                        resize: 'vertical',
-                      }}
-                      value={sparqlQuery}
-                      onChange={e => set('ext.osds.super_links.query', e.target.value)}
-                      aria-label={t('sparqlEndpoint') + ' Query'}
-                      aria-required="false"
-                    />
-                  </div>
-                  <div className="col-12 mt-2">
-                    <button className="btn btn-primary btn-sm me-2" onClick={handleRunSparql} disabled={sparqlLoading} type="button">
-                      {sparqlLoading ? t('running', 'Running...') : t('run', 'Run')}
-                    </button>
-                  </div>
-                  <div className="col-12 mt-2">
-                    {sparqlResult && (
-                      <pre className="bg-light p-2 mt-2" style={{ maxHeight: 300, overflow: 'auto' }}>{typeof sparqlResult === 'object' ? JSON.stringify(sparqlResult, null, 2) : String(sparqlResult)}</pre>
-                    )}
-                  </div>
-                </div>
-              </section>
-              <section className="mb-4">
-                <h5>{t('dataNormalization', 'Data Normalization')}</h5>
-                <pre style={{ background: '#f8f9fa', padding: 12, borderRadius: 4 }}>
-                  {JSON.stringify(graph, null, 2)}
-                </pre>
-              </section>
-              <section className="mb-4">
-                <h5>{t('isIRI', 'IRI Check')}</h5>
-                <div>
-                  <code>http://example.org/a</code>: {String(dataUtils.isIRI('http://example.org/a'))}<br />
-                  <code>not-an-iri</code>: {String(dataUtils.isIRI('not-an-iri'))}
-                </div>
-              </section>
-              <section className="mb-4">
-                <h5>{t('parsePOSH', 'Parse POSH')}</h5>
-                <div>
-                  <em>{t('parsePOSHDesc', 'Run parsePOSH on the current document in the browser console.')}</em>
-                </div>
-                      </section>
-                    </div>
+        {/* Import Bookmarks section */}
+        <section className="mb-4">
+          <h5>Import Bookmarks (HTML to Semantic Bookmarks)</h5>
+          <div className="mb-2">
+            <input
+              type="file"
+              accept="text/html,.html"
+              ref={fileInputRef}
+              style={{ display: 'inline-block', width: 220 }}
+              onChange={handleBookmarkImport}
+            />
+            <button className="btn btn-outline-secondary btn-sm ms-2" type="button" onClick={() => fileInputRef.current && fileInputRef.current.click()}>
+              {t('chooseFile', 'Choose File')}
+            </button>
+          </div>
+          <div className="small text-muted mb-2">Upload a bookmarks HTML file exported from your browser. All bookmarks will be converted to semantic bookmarks and added to your collection.</div>
+          {importResult && (
+            <div className="alert alert-info py-2">
+              {importResult.error
+                ? <>Error: {importResult.error}</>
+                : <>
+                    Imported <b>{importResult.count}</b> bookmarks.<br />
+                    Total semantic bookmarks: <b>{importResult.mergedCount}</b>.
                   </>
-                );
-        }
+              }
+            </div>
+          )}
+        </section>
+
+        {/* SuperLinks Query Settings UI moved from SuperLinksTab */}
+        <section className="mb-4">
+          <h5>{t('superLinksQuerySettings', 'SuperLinks Query Settings')}</h5>
+          {/* ...existing settings code... */}
+          <div className="mb-3 row">
+            <div className="col-12 fw-bold">{t('sparqlQuery', 'SPARQL Query:')}</div>
+            <div className="col-12" style={{ position: 'relative', display: 'flex', alignItems: 'stretch' }}>
+              {/* Line numbers */}
+              <div style={{
+                background: '#f8f9fa',
+                color: '#888',
+                textAlign: 'right',
+                padding: '8px 6px',
+                borderRadius: '4px 0 0 4px',
+                userSelect: 'none',
+                fontFamily: 'monospace',
+                fontSize: 13,
+                minWidth: 32,
+                border: '1px solid #ced4da',
+                borderRight: 'none',
+                height: 220,
+                overflow: 'hidden',
+                lineHeight: '1.5',
+              }}>
+                {sparqlLines.map((_, i) => (
+                  <div key={i}>{i + 1}</div>
+                ))}
+              </div>
+              {/* Textarea */}
+              <textarea
+                className="form-control"
+                style={{
+                  width: '100%',
+                  height: 220,
+                  whiteSpace: 'pre',
+                  borderRadius: '0 4px 4px 0',
+                  borderLeft: 'none',
+                  fontFamily: 'monospace',
+                  fontSize: 13,
+                  resize: 'vertical',
+                }}
+                value={sparqlQuery}
+                onChange={e => set('ext.osds.super_links.query', e.target.value)}
+                aria-label={t('sparqlEndpoint') + ' Query'}
+                aria-required="false"
+              />
+            </div>
+            <div className="col-12 mt-2">
+              <button className="btn btn-primary btn-sm me-2" onClick={handleRunSparql} disabled={sparqlLoading} type="button">
+                {sparqlLoading ? t('running', 'Running...') : t('run', 'Run')}
+              </button>
+            </div>
+            <div className="col-12 mt-2">
+              {sparqlResult && (
+                <pre className="bg-light p-2 mt-2" style={{ maxHeight: 300, overflow: 'auto' }}>{typeof sparqlResult === 'object' ? JSON.stringify(sparqlResult, null, 2) : String(sparqlResult)}</pre>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-4">
+          <h5>{t('dataNormalization', 'Data Normalization')}</h5>
+          <pre style={{ background: '#f8f9fa', padding: 12, borderRadius: 4 }}>
+            {JSON.stringify(graph, null, 2)}
+          </pre>
+        </section>
+
+        <section className="mb-4">
+          <h5>{t('isIRI', 'IRI Check')}</h5>
+          <div>
+            <code>http://example.org/a</code>: {String(dataUtils.isIRI('http://example.org/a'))}<br />
+            <code>not-an-iri</code>: {String(dataUtils.isIRI('not-an-iri'))}
+          </div>
+        </section>
+
+        <section className="mb-4">
+          <h5>{t('parsePOSH', 'Parse POSH')}</h5>
+          <div>
+            <em>{t('parsePOSHDesc', 'Run parsePOSH on the current document in the browser console.')}</em>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+}

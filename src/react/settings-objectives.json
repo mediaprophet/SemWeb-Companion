@@ -1,0 +1,21 @@
+{
+  "objectives": [
+    "Multi-AI agent management: add, edit, delete, select, and configure multiple AI agents (name, image, provider, model, API key, temperature, max tokens, prompts)",
+    "Solid Pod connection: login/logout, show status, manage Solid OIDC credentials",
+    "CORS proxy configuration: select, add, and remove proxy URLs; set default proxy",
+    "Data extractor options: enable/disable extractors (Microdata, JSON-LD, RDFa, OpenGraph, Twitter Cards, Schema.org)",
+    "Bookmark management: export, import, and clear bookmarks",
+    "Data privacy: clear local storage and user data",
+    "Advanced options: toggle debug mode, show performance stats",
+    "About/version info: show app version, about dialog, and credits",
+    "Reset to defaults: revert all settings to default values",
+    "SPARQL Query Service: configure and test SPARQL endpoints (future)",
+    "Super Links: configure SuperLinks settings (future)",
+    "LLM Chat: configure chat agent and chat settings (future)",
+    "Internationalization: change language and manage translations (optional)",
+  "Theme and appearance: light/dark mode, font size, UI preferences (optional)",
+  "Theme management: upload, select, validate, preview, and auto-discover themes (modular, user-extensible)"
+    "Accessibility: keyboard navigation, screen reader support (optional)",
+    "User profile: manage user info, avatar, and preferences (optional)"
+  ]
+}

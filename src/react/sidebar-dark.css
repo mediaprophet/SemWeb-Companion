@@ -1,0 +1,18 @@
+.sidebar-dark .nav-link {
+  color: #cfd8dc !important;
+}
+.sidebar-dark .nav-link.active, .sidebar-dark .nav-link:focus, .sidebar-dark .nav-link:hover {
+  color: #fff !important;
+  background: #495057 !important;
+}
+.sidebar-dark .accordion-button {
+  background: #343a40 !important;
+  color: #cfd8dc !important;
+}
+.sidebar-dark .accordion-button:not(.collapsed) {
+  background: #495057 !important;
+  color: #fff !important;
+}
+.sidebar-dark .accordion-body {
+  background: #343a40 !important;
+}

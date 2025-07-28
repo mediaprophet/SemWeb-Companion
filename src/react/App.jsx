@@ -6,18 +6,15 @@ import AboutDialog from './AboutDialog.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 import SettingsTab from './SettingsTab.jsx';
 import SparqlTab from './SparqlTab.jsx';
-import SuperLinksTab from './SuperLinksTab.jsx';
-import SuperLinksDemo from './SuperLinksDemo.jsx';
-import DataView from './data-view/DataView.jsx';
-import SemanticBookmarksSidebar from './SemanticBookmarksSidebar.jsx';
 import SolidAuthProvider from './solid/SolidAuthProvider.jsx';
 import SolidLoginStatus from './login/SolidLoginStatus.jsx';
-import Directory from './directory/Directory.jsx';
 import AiAgentPanel from './AiAgentPanel.jsx';
+import Apps from './Apps.jsx';
 
 export default function App() {
   const { t, i18n } = useTranslation();
-  const [tab, setTab] = useState('bookmarks');
+  const [tab, setTab] = useState('directory');
+  const [breadcrumbSub, setBreadcrumbSub] = useState(null);
   const languages = [
     { code: 'en', label: 'English' },
     { code: 'en-GB', label: 'English (UK)' },
@@ -46,7 +43,7 @@ export default function App() {
   return (
     <SolidAuthProvider>
       <ErrorBoundary>
-        <AppLayout activeKey={tab} onNav={setTab}>
+  <AppLayout activeKey={tab} onNav={setTab} breadcrumbSub={breadcrumbSub}>
           <div className="d-flex align-items-center justify-content-end mb-3">
             <label htmlFor="lang-switcher" className="me-2 fw-normal">{t('language', 'Language')}:</label>
             <select id="lang-switcher" className="form-select form-select-sm d-inline-block" style={{ width: 130 }} value={i18n.language} onChange={handleLangChange}>
@@ -57,13 +54,10 @@ export default function App() {
           </div>
           {/* Remove SolidOidcLogin, add login state notification */}
           <SolidLoginStatus />
-          <Directory />
           <AiAgentPanel />
-          {tab === 'bookmarks' && <Directory />}
-          {tab === 'structured' && <DataView />}
-          {tab === 'chat' && <SuperLinksTab />}
+          {/* Main app sections */}
+          {['directory','structured','chat','annotations'].includes(tab) && <Apps activeKey={tab} setBreadcrumbSub={setBreadcrumbSub} />}
           {tab === 'utils' && <UtilsTab />}
-          {tab === 'annotations' && <SuperLinksDemo />}
           {tab === 'settings' && <SettingsTab />}
           {tab === 'about' && <AboutDialog show={true} onClose={() => setTab('settings')} />}
         </AppLayout>

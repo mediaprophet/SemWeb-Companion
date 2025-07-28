@@ -1,0 +1,9 @@
+{
+  "name": "DefaultTheme",
+  "displayName": "Default Theme",
+  "author": "Your Name",
+  "version": "1.0.0",
+  "description": "The default theme for the application.",
+  "mainCss": "theme.css",
+  "previewImage": "preview.png"
+}
