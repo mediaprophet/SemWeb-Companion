@@ -17,27 +17,13 @@ console.log('[DEBUG] popup.js loaded at', new Date().toISOString());
 // popup.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Update summary if available from background/content script
-  const summary = document.getElementById('summary');
-  // Example: request summary from background (stub)
-  if (chrome && chrome.runtime && chrome.runtime.sendMessage) {
-    chrome.runtime.sendMessage({ type: 'GET_DATA_SUMMARY' }, (response) => {
-      if (response && response.summary) {
-        summary.textContent = response.summary;
-      } else {
-        summary.textContent = 'No structured data detected.';
-      }
-    });
-  } else {
-    summary.textContent = 'No structured data detected.';
-  }
-
   // Open side panel
   document.getElementById('open-sidepanel').addEventListener('click', () => {
-    if (chrome && chrome.sidePanel) {
+    if (chrome && chrome.sidePanel && chrome.sidePanel.open) {
       chrome.sidePanel.open({ windowId: chrome.windows.WINDOW_ID_CURRENT });
     } else {
-      alert('Side panel API not available.');
+      // Fallback: open sidebar.html in a new tab
+      chrome.tabs.create({ url: chrome.runtime.getURL('sidebar.html') });
     }
   });
 
@@ -45,11 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('open-settings').addEventListener('click', () => {
     if (chrome && chrome.runtime && chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
+    } else {
+      // Fallback: open index.html in a new tab
+      chrome.tabs.create({ url: chrome.runtime.getURL('index.html') });
     }
-  });
-
-  // Export/copy action (stub)
-  document.getElementById('export-data').addEventListener('click', () => {
-    alert('Export/copy functionality coming soon!');
   });
 });

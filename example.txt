@@ -1,0 +1,1149 @@
+JSON-LD
+[
+  {
+    "@type": "LiveBlogPosting",
+    "@context": "http://schema.org",
+    "@id": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+    "publisher": {
+      "@type": "Organization",
+      "@context": "https://schema.org",
+      "@id": "https://www.theguardian.com#publisher",
+      "name": "The Guardian",
+      "url": "https://www.theguardian.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+        "width": 190,
+        "height": 60
+      },
+      "sameAs": [
+        "https://www.facebook.com/theguardian",
+        "https://twitter.com/guardian",
+        "https://www.youtube.com/user/TheGuardian"
+      ]
+    },
+    "isAccessibleForFree": true,
+    "image": [
+      "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+      "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+      "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+      "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+    ],
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Royce Kurmelovs",
+        "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+      },
+      {
+        "@type": "Person",
+        "name": "Caitlin Cassidy",
+        "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+      },
+      {
+        "@type": "Person",
+        "name": "Benita Kolovos",
+        "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+      }
+    ],
+    "datePublished": "2025-07-27T05:56:57.000Z",
+    "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+    "dateModified": "2025-07-27T05:59:17.000Z",
+    "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+    "coverageStartTime": "2025-07-27T05:56:57+0000",
+    "coverageEndTime": "2025-07-27T05:59:17+0000",
+    "liveBlogUpdate": [
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "688553b98f08acf29cc626cd",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "With that, we’re wrapping up the blog. Before we go, here are the biggest stories from today: Prime minister Anthony Albanese says he believes Israel has breached international law by stopping food from entering Gaza; The prime minister also said the government has not yet made a decision about whether YouTube will be included in a social media ban; Albanese also said the timing of an end to the ban on the importation of US beef was a “absolutely” a coincidence; Deputy prime minister Richard Marles has attended the Talisman Sabre war games in Darwin; Dfat has confirmed two Australians were on a boat seized by the Israeli military as people on board tried to bring aid to Gaza despite a blockade; Australian academic Feng Chongyi says an arrest warrant issued for him by Hong Kong authorities amounted to “political prosecution”; Victorian Premier Jacinta Allan has rejected an analysis by rightwing thinktank the Institute of Public Affairs alleging the government spent $382m on treaty negot"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885885e8f08acf29cc62787",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "The piece of data that could determine the next interest rate move Quarterly inflation data will dominate the economic agenda this week, while dwelling approvals, retail sales and property price figures will also be revealed. Traders, economists and mortgage holders will be locked into the Australian Bureau of Statistics website this week for a piece of data that could determine whether the Reserve Bank cuts interest rates next month. Minutes from the RBA board’s last meeting confirmed the central bank was holding out for more signs inflation was on track before cutting again, highlighting the importance of Wednesday’s quarterly consumer price index. On Thursday, economists will gorge on a feast of data as the ABS releases retail trade, building approvals and international trade price figures. The retail print is the last the bureau will produce before it switches over to a more comprehensive measure of consumption, the monthly household spending indicator. Property analytics firm Cota"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "688557718f0889d9a4a7caef",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Australia’s housing auction market remains strong Auction activity has climbed this weekend with 1,774 auctions scheduled. This is a slight increase on the 1,561 held last week but down from 1,975 auctions held at the same time last year. Based on results collected so far, property data group Cotality’s summary shows the preliminary clearance rate was 74.7% across the country,on par with 70.4% recorded last week but above the 69.4% actual rate on final numbers and 65.1% at the same time, last year. Across the capital cities: Sydney: 431 of 601 auctions with a preliminary clearance rate of 73.8% Melbourne: 628 of 837 auctions with a preliminary clearance rate of 76.3% Brisbane: 145 0f 190 auctions with a preliminary clearance rate of 74.5% Adelaide: 55 of 86 auctions with a preliminary clearance rate of 81.3% Canberra: 38 of 49 auctions with a preliminary clearance rate of 73.7% Tasmania: No auctions held. Perth: Six auctions to be held."
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68855b308f0889d9a4a7caf8",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Despite ambitious plans, Sydney’s Callan Park plans remain in limbo On the banks of Iron Cove in Sydney’s inner west is one the city’s unsung treasures: 61 hectares of rolling lawns, bushland and sandstone buildings that was once home to Rozelle hospital – originally Callan Park hospital for the insane. For those who dream big, it could be Sydney’s next Centennial Park, a vibrant parkland attracting visitors from around Sydney.\nYears of disagreements over the site’s future, bureaucratic inertia and a highly restrictive Callan Park Act – which prevents any commercial activities, even restaurants and cafes – have left it in stasis. But change could finally be on its way, for better or worse, as the state government considers changing the act – described by the planning minister, Paul Scully, as imposing “the most restrictions of any of our public spaces”. Communities have come to expect a degree of activation in their public spaces these days, and while we are committed to protecting Cal"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "688559058f0807c836ad5894",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "NSW police celebrate role in transporting donated organs to patients New South Wales police have marked the anniversary of a life-saving program where Highway Patrol officers help in the urgent transport of donor organs to patients who need them. Over 40 years, more than 3700 emergency medical transfers have taken place within New South Wales, with more than 1300 in the past 10 years. Between 60 and 100 transports are carried out every year, with 86 transfers so far, this year. When a request comes in, highway patrol cars travel to a hospital or airport to collect the organ, stored inside a cooler box carried by a doctor or nurse, before the cars travel in convoy to another hospital or airport to deliver the organ. Traffic and Highway Patrol Commander, Assistant Commissioner David Driver said officers can be called to help “any time of the day, every day of the year”. Emergency medical transfers are a vital service, often helping to give people a second chance at life, and we are proud"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68855bf88f0889d9a4a7caff",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Alpine rescue finds hikers lost in Koscuiszko New South Wales police have urged hikers to check weather conditions after a group of walkers was rescued in a multi-agency alpine rescue in Koscuiszko national park on Saturday night. The search for seven hikers began at 1.15pm on Saturday after a personal locator beacon (PLB) was activated near Dead Horse Gap Track in Kosciuszko national park, south-west of Thredbo. The hikers – aged from 21 to 48 – were found about 7pm before they were assessed by paramedics and treated for exposure to the cold. All were taken to Thredbo Village in a Snowcat vehicle. Officers attached to Monaro Police district and Police Search and Rescue, State Emergency Service Alpine Search and Rescue operators, and NSW Ambulance Alpine Operations paramedics were involved in the search. Police were told the hikers had become disoriented after a sudden change in weather conditions. Monaro Police District Commander, Det Acting Supt Keith Price, said the fact the group h"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68856a7b8f0807c836ad58e2",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Queensland police seeking owner of mysterious sunken vessel Queensland Police are looking for the owners of a sunken vessel found off Port Douglas, north of Cairns. Water police found the vessel this morning halfway between Low Isles and Batt Reef after it was reported by a tourism helicopter at 10.10am. It was described as an 8m sailing vessel; it’s believed no one was board when it sunk. The vessel may have come adrift from moorings or its anchor, as the mast was disabled and tied to the foredeck, leaving it unable to sail. Water police are appealing for the owners or anyone who recognises the vessel or has further information to contact police."
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885adf48f0807c836ad59d1",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Australians take to the streets to support Palestinians Thousands of people have today gathered in Sydney, Brisbane and Melbourne to protest on behalf of Palestinians, especially those in Gaza desperately seeking food aid. The protests come as ceasefire talks between Israel and Hamas collapse."
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885af2f8f0807c836ad59d6",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Wong reiterates PM’s comments that blocking food aid to Gaza is a breach of international law Circling back to the press conference in Darwin, and Penny Wong has backed the prime minister’s accusations today that Israel has breached international law by blocking aid to Gaza. Speaking on Insiders this morning, Anthony Albanese said “quite clearly it is a breach of international law to stop food being delivered, which was a decision that Israel made in March”. He warned that Benjamin Netanyahu’s government was “losing support” internationally. Asked whether Australia was obliged to act on the accused breach of international law, and whether further aid drops would be facilitated, Wong said the prime minister had made Australia’s position “clear”. It is forbidden to withhold aid from civilians, that is not consistent with international law, but actually, just as importantly, it’s morally the wrong thing to do. Wong said Australia would continue to contribute “what we are able to” in relat"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885a3ea8f0807c836ad59b2",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Trade minister Farrell says he made a mistake about Trump raising US beef imports with PM The trade minister, Don Farrell, says he made a mistake when he claimed US President Donald Trump had raised the issue of US beef exports to Australia directly in discussions with Anthony Albanese during an interview this morning on Sky News. Farrell earlier told the Sydney Morning Herald, and his office confirmed with the Guardian, that he had erred when he made the statement, that he had in fact been referencing public comments Trump had made in his “Liberation Day” press conference."
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885a0318f0807c836ad59a8",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Two Australians are among those who were aboard a vessel seized by the Israeli military during an attempt to break a blockage on Gaza to bring aid to the strip. A spokesperson for the Department of Foreign Affairs and Trade told the Guardian: Dfat is aware two Australians were on board the Freedom Flotilla Coalition vessel Handala, along with 19 others. Our officials in Tel Aviv are liaising with authorities, and consular officers stand ready to offer assistance to affected Australians. For more on this story, read the full report by the Guardian Australia’s Caitlin Cassidy:"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885a1f48f0889d9a4a7cbf7",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Allan says ‘some challenges’ accommodating medical cannabis in existing laws The Victorian premier has been asked about a motion by the Legalise Cannabis party, to be debated at state parliament this week, to protect workers taking medicinal cannabis from losing their jobs if they test positive for the drug while at work. The Herald Sun has reported that the motion is backed by AFL coaches and medicinal cannabis users Damien Hardwick and Alastair Clarkson. Jacinta Allan conceded there were “some challenges” with how medical cannabis fits within existing laws. She said one example was driving laws, and she noted the government was trialling research about the affect medicinal cannabis has on drivers: There is some work being undertaken with road safety experts about how we can have a regime on our road network that recognises people who use medicinal cannabis and how that may interact with their use on the road network. We’ve got nothing to add in terms of any further changes today but "
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68859c168f08acf29cc627ce",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Jacinta Allan was asked at the press conference about analysis from the rightwing thinktank, the Institute of Public Affairs, suggesting the government has spent $382m on negotiating a statewide Indigenous treaty. She described it as a “cherrypicked analysis from the conservative Liberal party aligned thinktank that doesn’t support treaty”. Allan went on: We’ve been on a long and steady journey towards treaty here in Victoria. There’s been two pieces of legislation [passed] through the Victorian parliament, the First People’s Assembly has been through two direct elections. This is all about being on a process – and on a long and steady pathway – to have in place in Victoria a new, practical framework for how we not just listen to Indigenous Victorians, but involve them in the decisions and the policies and the projects and programs that directly affect them. International evidence, the Productivity Commission, tells us that this is the way that you can close the gap on that wide differ"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "688599b78f08acf29cc627c7",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Melbourne’s Metro Tunnel project to have 30 retail and hospitality spaces The minister for transport infrastructure, Gabrielle Williams, says expressions of interest have opened for new tenants for the Campbell Arcade. She says they will be announced in coming weeks: They’d probably be referred to as closer to pop-ups than tenancies. There are some restrictions as to what can be down here, mainly for reasons of ventilation. There wouldn’t be cooked food outlets down here. The exciting part of the process that’s now under way on the back of that expression of interest process is working through those options and those applications, and then very soon being able to come back out here and tell you which tenants are going to be occupying these incredible spaces, and really bringing them to life. Williams said across the five new Metro Tunnel stations there were also 30 retail and hospitality spaces: We also have to remember that these stations are community spaces … where people meet, they"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "6885979b8f08acf29cc627c0",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Melbourne’s Campbell Arcade to reopen on Monday after major restoration The Victorian premier, Jacinta Allan, and transport infrastructure minister, Gabrielle Williams, held a press conference earlier today to announce that Campbell Arcade – a pedestrian arcade connecting Flinders Street Station to Degraves Street – will reopen tomorrow. The 70-year-old arcade has been closed since 2022 because of Metro Tunnel works. When the tunnel opens later this year, it will also become a walkway to the new town hall station.\nAllan says restoration works to restore the arcade to its “former glory” have included replacing the ceiling, upgrading lighting and repairing 1950s-era heritage features, including tiled shop fronts and display cases. She says: This is an historic arcade built in the 1950s to accommodate passenger movements ahead of the 1956 Olympics. It has been closed for a number of years whilst we’ve undertaken important connectivity works, and standing here in the middle of Campbell Arc"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68859a8d8f0807c836ad598e",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "Wong says UK, Australia to keep working on Women, Peace and Security agenda Foreign Minister Penny Wong has spoken in Darwin alongside British foreign secretary David Lammy about the role of women in the defence force. Wong said women and girls “bear the brunt too often in horrific conflicts around the world” and specifically pointed to sexual violence carried out by Russian forces in Ukraine.\nI’m very grateful that as part of our discussions, the UK and Australia are agreeing to continue to work together to progress the Women, Peace and Security objectives. We’ll continue to do that. It matters. And most of all, today, I do want to thank the remarkable women behind me and all the women who serve in our defence personnel who help keep us safer. Lammy said: It’s a huge pleasure to be here with one of the great female foreign secretaries of our time and to have behind us women across our armed forces and across three nations – Australia, New Zealand, and of course, the United Kingdom. An"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68855af98f0807c836ad589b",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "NSW spending $1.5m on literary hub to rival Melbourne’s Wheeler Centre and boost Sydney Writers festival Sydney’s literati is about to get what Melbourne has had for more than decade – a rival to the Wheeler Centre that established the southern city’s Unesco-endorsed reputation as the literary and publishing capital of Australia. The New South Wales arts minister, John Graham, today announced the establishment of a dedicated literature hub, to be based out of the state’s public library, as is Melbourne’s Wheeler Centre.\nThe new hub, with initial funding of $1.5m from the state government, will mean Sydney Writers festival events will take place all year round – 75 literary events over the next 12 months. “There’s nothing like a festival in terms of the intensity and the sheer numbers of fantastic things that are on,” the creative director of the Sydney Writers festival, Ann Mossop, said. For more, read the full story by Guardian Australia’s Kelly Burke:"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "688588e88f0889d9a4a7cba3",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "A decision to allow US beef imports into Australia was not aimed at appeasing the White House as part of tariff talks, the prime minister says. The lifting of a ban on US beef imports shortly after US President Donald Trump demanded it is just a coincidence, prime minister Anthony Albanese insists. Trump claimed credit for Australia’s decision to ease its biosecurity restrictions on America – a grievance used by the White House to help justify placing tariffs on Australia.\nBut the two were not linked, Albanese claimed. Asked on ABC’s Insiders program today if it was just a coincidence, he said: “absolutely”. There has been an independent review, it took 10 years. The decision has been made and it was made independently, at arm’s length of any political decision. He pointed out Trump had said he was unaware that Australia was going to make the decision until after the fact. Trump also did not raise it directly with him in phone conversations, although he had made his displeasure over th"
+      },
+      {
+        "@type": "BlogPosting",
+        "@context": "http://schema.org",
+        "@id": "68858a048f0889d9a4a7cba4",
+        "publisher": {
+          "@type": "Organization",
+          "@context": "https://schema.org",
+          "@id": "https://www.theguardian.com#publisher",
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+            "width": 190,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.facebook.com/theguardian",
+            "https://twitter.com/guardian",
+            "https://www.youtube.com/user/TheGuardian"
+          ]
+        },
+        "isAccessibleForFree": true,
+        "image": [
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5c09d123276e173583b8f7d33842c6e8",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=c5f2ed4a0f751af28e590697deed79f5",
+          "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&quality=85&auto=format&fit=max&s=adb41f33da11cabfc4c4fbe3dc471d11"
+        ],
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Royce Kurmelovs",
+            "sameAs": "https://www.theguardian.com/profile/royce-kurmelovs"
+          },
+          {
+            "@type": "Person",
+            "name": "Caitlin Cassidy",
+            "sameAs": "https://www.theguardian.com/profile/caitlin-cassidy"
+          },
+          {
+            "@type": "Person",
+            "name": "Benita Kolovos",
+            "sameAs": "https://www.theguardian.com/profile/benita-kolovos"
+          }
+        ],
+        "datePublished": "2025-07-27T05:56:57.000Z",
+        "headline": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened",
+        "dateModified": "2025-07-27T05:59:17.000Z",
+        "mainEntityOfPage": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+        "articleBody": "MSF Australia: Israeli government claims of no famine conditions in Gaza a ‘lie’ Médecins Sans Frontières Australia says the Israeli government’s announcement that it will allow food into Gaza should be treated with caution because questions remain about how the plan will be carried out. Speaking to the ABC today, MSF Australia’s executive director Jennifer Tierney says not enough is known about the airdrops to make an informed judgment about whether this a serious effort to deliver aid. You need to be able to make sure that there is security, that people who have been under siege for months on end – who are starving and desperate to get support – don’t rush the aid points, that bad actors don’t take advantage of the situation. And so to see this turnaround so quickly, it is really quite concerning that we’re going to see a lot of the same scenes that we’re watching play out right now, which is, people converging on aid points, creating security situations and people getting shot at an"
+      }
+    ]
+  },
+  {
+    "@type": "WebPage",
+    "@context": "https://schema.org",
+    "@id": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb",
+    "potentialAction": {
+      "@type": "ViewAction",
+      "target": "android-app://com.guardian/https/www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb"
+    }
+  }
+]
+OpenGraph
+[
+  {
+    "property": "og:url",
+    "content": "https://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb"
+  },
+  {
+    "property": "og:image:width",
+    "content": "1200"
+  },
+  {
+    "property": "og:image",
+    "content": "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=91757df23e9069e66a0e26b39c51e86f"
+  },
+  {
+    "property": "og:title",
+    "content": "Wong calls withholding aid from civilians ‘morally’ wrong – as it happened"
+  },
+  {
+    "property": "og:image:height",
+    "content": "960"
+  },
+  {
+    "property": "og:description",
+    "content": "This blog is now closed"
+  },
+  {
+    "property": "og:type",
+    "content": "article"
+  },
+  {
+    "property": "og:site_name",
+    "content": "the Guardian"
+  }
+]
+Twitter Cards
+[
+  {
+    "name": "twitter:dnt",
+    "content": "on"
+  },
+  {
+    "name": "twitter:app:id:iphone",
+    "content": "409128287"
+  },
+  {
+    "name": "twitter:app:name:googleplay",
+    "content": "The Guardian"
+  },
+  {
+    "name": "twitter:app:name:ipad",
+    "content": "The Guardian"
+  },
+  {
+    "name": "twitter:card",
+    "content": "summary_large_image"
+  },
+  {
+    "name": "twitter:app:name:iphone",
+    "content": "The Guardian"
+  },
+  {
+    "name": "twitter:creator",
+    "content": "@RoyceRk2"
+  },
+  {
+    "name": "twitter:app:id:ipad",
+    "content": "409128287"
+  },
+  {
+    "name": "twitter:app:id:googleplay",
+    "content": "com.guardian"
+  },
+  {
+    "name": "twitter:app:url:googleplay",
+    "content": "guardian://www.theguardian.com/australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb"
+  },
+  {
+    "name": "twitter:app:url:iphone",
+    "content": "gnmguardian://australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb?contenttype=Article&source=twitter"
+  },
+  {
+    "name": "twitter:image",
+    "content": "https://i.guim.co.uk/img/media/93745eae0fc5464e9c8edd5c5802fa89cfc24e48/197_2255_3606_2885/master/3606.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&s=a7522e3a54c7cffaacdeb76e547e9cdf"
+  },
+  {
+    "name": "twitter:site",
+    "content": "@guardian"
+  },
+  {
+    "name": "twitter:app:url:ipad",
+    "content": "gnmguardian://australia-news/live/2025/jul/27/australia-news-live-anthony-albanese-richard-marles-aukus-defence-talisman-sabre-israel-gaza-ntwnfb?contenttype=Article&source=twitter"
+  }
+]

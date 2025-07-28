@@ -22,20 +22,26 @@
   },
   "permissions": [
     "storage",
+    "unlimitedStorage",
     "declarativeNetRequest",
-    "contextMenus"
+    "contextMenus",
+    "sidePanel",
+    "identity"
   ],
   "host_permissions": [
     "*://*/*",
-    "file:///*"
+    "file:///*",
+    "https://gun.eco/*",
+    "https://gunjs.herokuapp.com/gun"
   ],
-  "options_page": "index.html",
+
   "web_accessible_resources": [
     {
       "resources": [
         "images/*",
         "assets/*",
-        "popup.js"
+        "popup.js",
+        "react/index.html"
       ],
       "matches": [
         "<all_urls>"
@@ -47,5 +53,20 @@
   },
   "side_panel": {
     "default_path": "sidebar.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "open-side-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Open SemWeb Companion Side Panel"
+    }
   }
 }

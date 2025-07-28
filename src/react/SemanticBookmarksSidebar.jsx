@@ -1,5 +1,36 @@
 
 import React, { useState, useEffect } from "react";
+// Helper: pretty-print JSON as a table
+function JsonTable({ data }) {
+  if (!data) return null;
+  if (typeof data !== 'object') return <span>{String(data)}</span>;
+  const entries = Array.isArray(data) ? data.map((v, i) => [i, v]) : Object.entries(data);
+  return (
+    <table style={{ fontSize: 12, background: '#fafbfc', border: '1px solid #eee', borderRadius: 4, margin: '6px 0', width: '100%' }}>
+      <tbody>
+        {entries.map(([k, v]) => (
+          <tr key={k}>
+            <td style={{ fontWeight: 500, color: '#333', padding: '2px 6px', verticalAlign: 'top', minWidth: 60 }}>{k}</td>
+            <td style={{ padding: '2px 6px', verticalAlign: 'top' }}>{typeof v === 'object' && v !== null ? <JsonTable data={v} /> : String(v)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+// Helper: copy text to clipboard
+function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+  } else {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+}
 import { getSyncItem, setSyncItem } from "./storageSync.js";
 import LabeledInput from "./LabeledInput.jsx";
 import AlertMessage from "./AlertMessage.jsx";
@@ -50,6 +81,7 @@ export default function SemanticBookmarksSidebar() {
   const [activeDates, setActiveDates] = useState([]); // array of dates
   const [activeRatings, setActiveRatings] = useState([]); // array of ratings
   const [expandedDomains, setExpandedDomains] = useState({});
+  const [expandedBookmarks, setExpandedBookmarks] = useState({}); // { domain: { idx: bool } }
 
   // Helper: extract all unique tags, dates, ratings
   const allTags = Array.from(new Set(bookmarks.flatMap(b => (b.tags || [])))).filter(Boolean);
@@ -101,6 +133,10 @@ export default function SemanticBookmarksSidebar() {
   }, {});
 
   const toggleDomain = domain => setExpandedDomains(ed => ({ ...ed, [domain]: !ed[domain] }));
+  const toggleBookmark = (domain, idx) => setExpandedBookmarks(eb => ({
+    ...eb,
+    [domain]: { ...((eb && eb[domain]) || {}), [idx]: !((eb && eb[domain] && eb[domain][idx]) || false) }
+  }));
 
   // Load from sync storage (cross-browser)
   useEffect(() => {
@@ -226,19 +262,37 @@ export default function SemanticBookmarksSidebar() {
             </div>
             {expandedDomains[domain] && (
               <div style={{ marginLeft: 16, marginTop: 2 }}>
-                {bms.map((b, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                    <img
-                      src={b.image || b.favicon || '/favicon.ico'}
-                      alt="favicon"
-                      style={{ width: 18, height: 18, borderRadius: 3, objectFit: 'contain', background: '#eee', marginRight: 4 }}
-                      onError={e => { e.target.onerror = null; e.target.src = '/favicon.ico'; }}
-                    />
-                    <a href={b.url} target="_blank" rel="noopener noreferrer">{b.label || b.name || b.url}</a>
-                    {b.tags && b.tags.length > 0 && <span className="ms-1 text-muted" style={{fontSize:11}}>[{b.tags.join(', ')}]</span>}
-                    {b.ratingValue && <span className="ms-1 text-warning" style={{fontSize:11}}>★{b.ratingValue}</span>}
-                  </div>
-                ))}
+                {bms.map((b, i) => {
+                  const isOpen = expandedBookmarks[domain]?.[i];
+                  return (
+                    <div key={i} style={{ marginBottom: 4 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', background: isOpen ? '#eef7ee' : 'none', borderRadius: 3, padding: isOpen ? '2px 2px 2px 0' : 0 }} onClick={() => toggleBookmark(domain, i)}>
+                        <span style={{ fontSize: 13, color: '#2a4', width: 14 }}>{isOpen ? '▼' : '▶'}</span>
+                        <img
+                          src={b.image || b.favicon || '/favicon.ico'}
+                          alt="favicon"
+                          style={{ width: 18, height: 18, borderRadius: 3, objectFit: 'contain', background: '#eee', marginRight: 4 }}
+                          onError={e => { e.target.onerror = null; e.target.src = '/favicon.ico'; }}
+                        />
+                        <a href={b.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: '#1976d2', fontWeight: 500 }}>{b.label || b.name || b.url}</a>
+                        {b.tags && b.tags.length > 0 && <span className="ms-1 text-muted" style={{fontSize:11}}>[{b.tags.join(', ')}]</span>}
+                        {b.ratingValue && <span className="ms-1 text-warning" style={{fontSize:11}}>★{b.ratingValue}</span>}
+                        <span style={{ marginLeft: 'auto', fontSize: 11, color: '#888' }}>{b.date?.slice(0,10) || b.dateCreated?.slice(0,10) || ''}</span>
+                      </div>
+                      {isOpen && (
+                        <div style={{ marginLeft: 24, marginTop: 2, marginBottom: 4, background: '#f8f8fa', border: '1px solid #e0e0e0', borderRadius: 4, padding: 8 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                            <span style={{ fontWeight: 500, color: '#333' }}>Structured Data</span>
+                            <button className="btn btn-sm btn-outline-secondary" style={{ fontSize: 11, padding: '2px 8px' }} onClick={e => { e.stopPropagation(); copyToClipboard(JSON.stringify(b.structuredData, null, 2)); }}>
+                              Copy JSON
+                            </button>
+                          </div>
+                          <JsonTable data={b.structuredData} />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

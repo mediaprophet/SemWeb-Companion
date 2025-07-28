@@ -19,6 +19,7 @@ import { serializeRDFXML } from '../../utils/parsers';
 import { parseRDFXML } from '../../utils/parsers';
 import parsePOSH from '../utils/parsePOSH.js';
 
+
 export default function DataView() {
   const { t } = useTranslation();
   const { settings } = useSettings();
@@ -51,6 +52,29 @@ export default function DataView() {
   const [posh, setPosh] = useState([]);
   const [turtleTriples, setTurtleTriples] = useState([]);
   const [turtleUrl, setTurtleUrl] = useState("");
+
+  // --- Structured data from current tab ---
+  useEffect(() => {
+    // Only run in Chrome extension context
+    if (!window.chrome || !chrome.runtime || !chrome.runtime.sendMessage) return;
+    // Request structured data from content script in current tab
+    chrome.tabs && chrome.tabs.query && chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs && tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_STRUCTURED_DATA' });
+      }
+    });
+    // Listen for response
+    const handleMessage = (msg, sender, sendResponse) => {
+      if (msg && msg.type === 'STRUCTURED_DATA' && msg.data) {
+        setJsonldBlocks(msg.data.jsonld || []);
+        setOpenGraph(msg.data.openGraph || []);
+        setTwitterMeta(msg.data.twitterMeta || []);
+        // Add more as needed
+      }
+    };
+    chrome.runtime.onMessage.addListener(handleMessage);
+    return () => chrome.runtime.onMessage.removeListener(handleMessage);
+  }, []);
 
   // Add isDark detection
   const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;

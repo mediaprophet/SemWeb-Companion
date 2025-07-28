@@ -37,7 +37,7 @@ function toTurtle(annotations) {
 
 export default function AnnotationsSidebar() {
   const { t } = useTranslation();
-  const { isLoggedIn, webId, putResource } = useSolidAuth();
+  const { isLoggedIn, webId, putResource } = useSolidAuth() || {};
   const [annotations, setAnnotations] = useState([]);
   const [target, setTarget] = useState(window.location.href);
   const [selection, setSelection] = useState("");

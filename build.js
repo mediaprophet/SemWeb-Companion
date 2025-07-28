@@ -53,7 +53,8 @@ function getManifestReplacements(target) {
       permissions: JSON.stringify([
         'storage',
         'declarativeNetRequest',
-        'contextMenus'
+        'contextMenus',
+        'sidePanel'
       ]),
       host_permissions: JSON.stringify([
         '*://*/*',
@@ -147,9 +148,9 @@ for (const file of extraFiles) {
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(distDir, file));
 }
 
-// 6. Copy popup.js and background.js if present (after all other build steps)
+// 6. Copy popup.js, background.js, and content-script.js if present (after all other build steps)
 (() => {
-  const extraScripts = ['popup.js', 'background.js'];
+  const extraScripts = ['popup.js', 'background.js', 'content-script.js'];
   for (const script of extraScripts) {
     const src = path.resolve(__dirname, 'src', script);
     if (fs.existsSync(src)) {
@@ -158,6 +159,17 @@ for (const file of extraFiles) {
     }
   }
 })();
+
+// 7. Copy sidebar.html for Chrome side panel support, updating script reference to built JS
+const sidebarHtmlSrc = path.resolve(__dirname, 'src', 'react', 'sidebar.html');
+const sidebarHtmlDest = path.join(distDir, 'sidebar.html');
+if (fs.existsSync(sidebarHtmlSrc)) {
+  let html = fs.readFileSync(sidebarHtmlSrc, 'utf8');
+  // Replace script src to point to built JS
+  html = html.replace(/<script type="module" src="\.\/sidebar\.jsx"><\/script>/g, '<script type="module" src="./assets/sidebar.js"></script>');
+  fs.writeFileSync(sidebarHtmlDest, html);
+  console.log('Copied and updated sidebar.html to build output.');
+}
 
 console.log(`\nBuild complete: ${distDir}\n`);
 console.log('You can now load this folder as an unpacked extension in your browser.');

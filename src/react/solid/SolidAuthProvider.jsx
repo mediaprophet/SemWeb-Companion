@@ -107,7 +107,7 @@ export function SolidAuthProvider({ children }) {
 }
 
 export function useSolidAuth() {
-  return useContext(SolidAuthContext);
+  return useContext(SolidAuthContext) || {};
 }
 
 export default SolidAuthProvider;

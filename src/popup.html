@@ -5,18 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Structured Data Sniffer Popup</title>
     <style>
-      body { font-family: sans-serif; min-width: 220px; margin: 12px; }
-      .actions { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-      .help { margin-top: 16px; font-size: 0.9em; color: #666; }
+      body {
+        font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        min-width: 240px;
+        margin: 0;
+        background: #f7f9fa;
+        color: #222;
+      }
+      .popup-container {
+        padding: 18px 16px 14px 16px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        margin: 12px;
+        min-width: 220px;
+        max-width: 340px;
+      }
+      .popup-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .popup-title img {
+        width: 24px;
+        height: 24px;
+      }
+      .actions {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .actions button {
+        font-size: 1em;
+        padding: 7px 0;
+        border-radius: 6px;
+        border: none;
+        background: #1976d2;
+        color: #fff;
+        transition: background 0.2s;
+        cursor: pointer;
+      }
+      .actions button:hover {
+        background: #1256a2;
+      }
+      .help {
+        margin-top: 16px;
+        font-size: 0.93em;
+        color: #666;
+        text-align: center;
+      }
+      .help a {
+        color: #1976d2;
+        text-decoration: none;
+      }
+      .help a:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
-    <div>
-      <strong>Structured Data Summary:</strong>
-      <div id="summary" style="margin: 8px 0;">Loading...</div>
+    <div class="popup-container">
+      <div class="popup-title">
+        <img src="images/icon16.png" alt="Icon" />
+        Structured Data Sniffer
+      </div>
       <div class="actions">
-        <button id="open-sidepanel">Open Side Panel</button>
-        <button id="export-data">Export/Copy Data</button>
+        <button id="open-sidepanel">Open Full Panel</button>
         <button id="open-settings">Settings</button>
       </div>
       <div class="help">

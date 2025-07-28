@@ -10,8 +10,11 @@
     "build:firefox": "vite build && node scripts/build-manifest.js firefox"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "18.0.1",
     "@inrupt/solid-client-authn-browser": "^3.1.0",
+    "@tanstack/react-table": "^8.13.4",
     "bootstrap": "^5.3.7",
+    "gun": "^0.2020.1241",
     "i18next": "^25.3.2",
     "jsonld": "^8.3.3",
     "markdown-it": "^14.1.0",
@@ -19,13 +22,11 @@
     "papaparse": "^5.5.3",
     "rdflib": "^2.2.37",
     "react": "^19.1.0",
-  "@hello-pangea/dnd": "18.0.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.6.1",
     "react-icons": "^5.5.0",
-  "@tanstack/react-table": "^8.13.4",
-  "reactflow": "^11.11.4"
+    "reactflow": "^11.11.4"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
