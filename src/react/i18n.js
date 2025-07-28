@@ -1,3 +1,4 @@
+
 import translationENGB from './locales/en-GB/translation.json';
 import translationENAU from './locales/en-AU/translation.json';
 import translationLA from './locales/la/translation.json';
@@ -7,6 +8,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import translationEN from './locales/en/translation.json';
+import directoryEN from './locales/en/directory.json';
 import translationFR from './locales/fr/translation.json';
 import translationNL from './locales/nl/translation.json';
 import translationIT from './locales/it/translation.json';
@@ -23,7 +25,10 @@ import translationID from './locales/id/translation.json';
 import translationHE from './locales/he/translation.json';
 
 const resources = {
-  en: { translation: translationEN },
+  en: { 
+    translation: translationEN,
+    directory: directoryEN,
+  },
   fr: { translation: translationFR },
   nl: { translation: translationNL },
   it: { translation: translationIT },

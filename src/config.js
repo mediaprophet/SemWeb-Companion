@@ -12,7 +12,7 @@ export const NAMESPACES = {
 };
 
 export const SERVICE_URLS = {
-  github: "https://github.com/mediaprophet/structured-data-sniffer",
+  github: "https://github.com/mediaprophet/semweb-companion",
   solidOpenlink: "https://solid.openlinksw.com",
   bootstrapCdn: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css",
   corsProxies: [

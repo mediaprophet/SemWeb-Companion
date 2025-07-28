@@ -1,4 +1,4 @@
-import { normalizeTriples } from '../DataView.jsx';
+import { normalizeTriples } from '../data-view/DataView.jsx';
 
 describe('normalizeTriples', () => {
   it('parses JSON-LD triples', () => {

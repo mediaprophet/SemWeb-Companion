@@ -1,4 +1,4 @@
-Of course, here is a comprehensive list of tasks to get the "Structured Data Sniffer" browser extension working properly, based on the provided code.
+Of course, here is a comprehensive list of tasks to get the "SemWeb Companion" browser extension working properly, based on the provided code.
 
 ### **High-Priority Tasks: Core Functionality**
 

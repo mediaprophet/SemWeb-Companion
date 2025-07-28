@@ -8,13 +8,16 @@ function renderRDFJSON(data, t) {
   return (
     <section typeof="schema:SoftwareApplication foaf:Project" resource={data['@id']} vocab="http://schema.org/">
       <div className="d-flex align-items-center mb-3">
-        <img alt={t('osdsIconAlt', 'OpenLink Structured Data Sniffer icon')} src="../images/icon48.png" style={{ width: 48, height: 48, marginRight: 16 }} />
+  <img alt={t('swcIconAlt', 'Semantic Web Companion icon')} src="/images/icon48.png" style={{ width: 48, height: 48, marginRight: 16 }} />
         <div>
-          <h2 property="schema:name" className="mb-0">{data['schema:name']}</h2>
+          <h2 property="schema:name" className="mb-0">{data['schema:name'] || 'Semantic Web Companion'}</h2>
           <span className="badge bg-info text-dark ms-2" property="schema:softwareVersion">v{data['schema:softwareVersion']}</span>
         </div>
       </div>
       <p property="schema:description" className="lead">{data['schema:description']}</p>
+      <div className="mb-2 text-muted" style={{ fontSize: 15 }}>
+        <em>This project is a modern refactor and evolution of the Openlink Structured Data Sniffer (OSDS).</em>
+      </div>
       <section className="mb-3">
         <h4>{t('features', 'Features')}</h4>
         <ul>
@@ -55,7 +58,11 @@ function renderRDFJSON(data, t) {
           <dt>{t('author', 'Author')}</dt>
           <dd>
             <FaUsers />{' '}
-            <a href={data['dc:creator'] && data['dc:creator']['@id']} property="dc:creator" rel="creator noopener noreferrer" target="_blank"><span property="foaf:name">{data['dc:creator'] && data['dc:creator']['foaf:name']}</span> <FaExternalLinkAlt style={{ fontSize: 12 }}/></a>
+            <span property="foaf:name">Media Prophet</span>
+            <div className="small text-muted mt-1">
+              Based on work by{' '}
+              <a href="https://www.openlinksw.com/" rel="noopener noreferrer" target="_blank">OpenLink Software <FaExternalLinkAlt style={{ fontSize: 12 }}/></a>
+            </div>
           </dd>
         </dl>
       </section>

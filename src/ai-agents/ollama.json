@@ -1,0 +1,20 @@
+{
+  "id": "ollama",
+  "name": "Ollama",
+  "apiUrl": "http://localhost:11434/api/chat",
+  "models": [
+    { "id": "llama3", "name": "Llama 3" },
+    { "id": "mistral", "name": "Mistral" },
+    { "id": "phi3", "name": "Phi-3" }
+  ],
+  "defaultModel": "llama3",
+  "request": {
+    "method": "POST",
+    "headers": { "Content-Type": "application/json" },
+    "body": {
+      "model": "<model>",
+      "messages": [ { "role": "user", "content": "<prompt>" } ]
+    }
+  },
+  "responsePath": "message.content"
+}

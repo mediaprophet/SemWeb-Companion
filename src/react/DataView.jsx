@@ -1,107 +1,12 @@
-// Utility: Convert triples to a graph structure for visualization
-function triplesToGraph(triples) {
-  const nodes = [];
-  const edges = [];
-  const nodeSet = new Set();
-  triples.forEach(({ s, p, o }, idx) => {
-    if (!nodeSet.has(s)) {
-      nodes.push({ id: s, label: s });
-      nodeSet.add(s);
-    }
-    if (!nodeSet.has(o)) {
-      nodes.push({ id: o, label: o });
-      nodeSet.add(o);
-    }
-    edges.push({ id: `e${idx}`, source: s, target: o, label: p });
-  });
-  return { nodes, edges };
-}
-// Supported data types for detection and normalization
-const DATA_TYPES = [
-  { key: 'jsonld', label: 'JSON-LD' },
-  { key: 'csv', label: 'CSV' },
-  { key: 'turtle', label: 'Turtle/N3' },
-  { key: 'rdfxml', label: 'RDF/XML' },
-  { key: 'posh', label: 'POSH' },
-  // Add more types as needed
-];
-
-// Utility: check if a string is an IRI
-function isIRI(str) {
-  return typeof str === 'string' && /^https?:\/\//.test(str);
-}
-
-// --- Triple normalization utility ---
-// Returns array of { s, p, o, [lang], [datatype] }
-function normalizeTriples(type, data, csvMapping, metaMapping) {
-  // JSON-LD
-  if (type === 'jsonld' && data) {
-    // Try to flatten @graph or array
-    let arr = [];
-    if (Array.isArray(data)) arr = data;
-    else if (data['@graph']) arr = data['@graph'];
-    else arr = [data];
-    // Extract triples
-    const triples = [];
-    arr.forEach(item => {
-      const subj = item['@id'] || '_:b0';
-      Object.entries(item).forEach(([p, v]) => {
-        if (p === '@id' || p === '@type' || p === '@context') return;
-        if (Array.isArray(v)) {
-          v.forEach(obj => {
-            if (typeof obj === 'object' && obj['@value'] !== undefined) {
-              triples.push({ s: subj, p, o: obj['@value'], lang: obj['@language'], datatype: obj['@type'] });
-            } else if (typeof obj === 'object' && obj['@id']) {
-              triples.push({ s: subj, p, o: obj['@id'] });
-            } else {
-              triples.push({ s: subj, p, o: obj });
-            }
-          });
-        } else if (typeof v === 'object' && v['@value'] !== undefined) {
-          triples.push({ s: subj, p, o: v['@value'], lang: v['@language'], datatype: v['@type'] });
-        } else if (typeof v === 'object' && v['@id']) {
-          triples.push({ s: subj, p, o: v['@id'] });
-        } else {
-          triples.push({ s: subj, p, o: v });
-        }
-      });
-    });
-    return triples;
-  }
-  // CSV
-  if (type === 'csv' && typeof data === 'string') {
-    // Simple CSV to triples: each row is a subject, columns are predicates
-    const lines = data.split(/\r?\n/).filter(Boolean);
-    if (lines.length < 2) return [];
-    const headers = lines[0].split(',');
-    return lines.slice(1).map((row, i) => {
-      const values = row.split(',');
-      return headers.map((h, j) => ({
-        s: `_:row${i}`,
-        p: h.trim(),
-        o: values[j] ? values[j].trim() : ''
-      }));
-    }).flat();
-  }
-  // Turtle/N3
-  if (type === 'turtle' && Array.isArray(data)) {
-    // Each line is a triple: subj pred obj .
-    return data
-      .map(line => {
-        const m = line.match(/^(\S+)\s+(\S+)\s+(.+)\s*\.$/);
-        if (!m) return null;
-        return { s: m[1], p: m[2], o: m[3].replace(/\"/g, '"') };
-      })
-      .filter(Boolean);
-  }
-  // RDF/XML (not parsed here, handled elsewhere)
-  if (type === 'rdfxml' && Array.isArray(data)) {
-    // Not supported in this utility; handled by parseRDFXML elsewhere
-    return [];
-  }
-  // Fallback: return empty array
-  return [];
-}
+import PerfStats from './data-view/PerfStats.jsx';
+import ShareControls from './data-view/ShareControls.jsx';
+import RawDataView from './RawDataView.jsx';
+import TriplesTable from './TriplesTable.jsx';
+import TypeSelector from './TypeSelector.jsx';
+import TripleDialog from './TripleDialog.jsx';
+import FilterInput from './data-view/FilterInput.jsx';
+import BulkFileManager from './BulkFileManager.jsx';
+import { triplesToGraph, DATA_TYPES, isIRI, normalizeTriples } from './utils/dataUtils.js';
 
 // Utility: fetch and preview IRI content
 async function fetchIRIContent(url) {
@@ -171,26 +76,80 @@ function importFrameFactory(setJsonldFramed, setJsonldFrame) {
   };
 }
 import React, { useEffect, useState, useMemo } from 'react';
+import Tabs from './Tabs.jsx';
+import RdfXmlImportExport from './data-view/RdfXmlImportExport.jsx';
+import UrlInput from './UrlInput.jsx';
+import { FaRegCopy, FaTwitter, FaRegBookmark } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useSettings } from './SettingsContext.jsx';
 import { useReactTable, getCoreRowModel, getFilteredRowModel } from '@tanstack/react-table';
-import RichPreview from './RichPreview';
+import RichPreviewCard from './data-view/RichPreviewCard.jsx';
 import { serializeRDFXML } from '../utils/parsers';
 import { parseRDFXML } from '../utils/parsers';
 
 // ...existing code...
 export default function DataView() {
+  // --- Settings accessor must be first ---
+  const { get: getSetting } = useSettings ? useSettings() : { get: () => undefined };
+  // --- URL fetch and parse state ---
+  const [fetchUrl, setFetchUrl] = useState("");
+  const [fetchLoading, setFetchLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
+  const [tab, setTab] = useState('url');
+
+  // Handler for fetching and parsing a URL
+  const handleFetchUrl = async (e) => {
+    e.preventDefault();
+    if (!fetchUrl.trim()) return;
+    setFetchLoading(true);
+    setFetchError(null);
+    try {
+      let url = fetchUrl.trim();
+      // Always use CORS proxy on localhost (React dev)
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        url = 'https://corsproxy.io/?' + encodeURIComponent(url);
+      }
+      const { contentType, text, error } = await fetchIRIContent(url);
+      if (error) throw new Error(error);
+      // Try to auto-detect type
+      let type = null, data = null;
+      if (/json(ld)?/i.test(contentType) || fetchUrl.endsWith('.jsonld')) {
+        type = 'jsonld';
+        data = JSON.parse(text);
+      } else if (/csv/i.test(contentType) || fetchUrl.endsWith('.csv')) {
+        type = 'csv';
+        data = text;
+      } else if (/turtle|n3/i.test(contentType) || fetchUrl.endsWith('.ttl')) {
+        type = 'turtle';
+        data = text.split(/\r?\n/).filter(Boolean);
+      } else if (/rdf\+xml/i.test(contentType) || fetchUrl.endsWith('.rdf')) {
+        type = 'rdfxml';
+        data = text.split(/\r?\n/).filter(Boolean);
+      } else {
+        // fallback: try JSON
+        try { data = JSON.parse(text); type = 'jsonld'; } catch { type = null; }
+      }
+      if (!type) throw new Error('Could not detect data type from URL');
+      // Set as only detected type
+      setDetectedTypes([{ key: type, label: type.toUpperCase(), data }]);
+      setSelectedType(type);
+      setRaw(data);
+    } catch (err) {
+      setFetchError(err.message);
+    } finally {
+      setFetchLoading(false);
+    }
+  };
   const { t } = useTranslation();
   // State for RDF/XML import results
   const [rdfxmlImportTriples, setRdfxmlImportTriples] = useState(null);
   const [rdfxmlImportErrors, setRdfxmlImportErrors] = useState([]);
   const [rdfxmlImportShowErrors, setRdfxmlImportShowErrors] = useState(false);
-  // --- Bulk Extraction State ---
+  // --- Bulk Extraction State/Handlers ---
   const [bulkFiles, setBulkFiles] = useState([]); // [{name, type, triples, error, raw}]
   const [bulkActiveIdx, setBulkActiveIdx] = useState(null);
   const [bulkDragOver, setBulkDragOver] = useState(false);
   const [bulkPreviewOpen, setBulkPreviewOpen] = useState(true);
-  // Bulk extraction handler
   const handleBulkFiles = async files => {
     setBulkFiles([]);
     setBulkActiveIdx(null);
@@ -198,7 +157,6 @@ export default function DataView() {
     const results = await Promise.all(arr.map(async file => {
       try {
         const text = await file.text();
-        // Try to auto-detect type
         let type = null, data = null, triples = [], error = null;
         if (/\.json(ld)?$/i.test(file.name)) {
           type = 'jsonld';
@@ -214,9 +172,8 @@ export default function DataView() {
           data = text.split(/\r?\n/).filter(Boolean);
         } else if (/\.posh$/i.test(file.name)) {
           type = 'posh';
-          data = text; // Not a Document, but fallback
+          data = text;
         } else if (/\.txt$/i.test(file.name)) {
-          // Try to guess: CSV or Turtle
           if (text.includes('@prefix') || text.match(/\s[a-z]+:/i)) {
             type = 'turtle';
             data = text.split(/\r?\n/).filter(Boolean);
@@ -226,7 +183,6 @@ export default function DataView() {
           }
         }
         if (!type) throw new Error('Unknown file type');
-        // Parse triples
         triples = normalizeTriples(type, data, csvMapping, metaMapping);
         return { name: file.name, type, triples, error: null, raw: data };
       } catch (e) {
@@ -236,7 +192,6 @@ export default function DataView() {
     setBulkFiles(results);
     setBulkActiveIdx(results.length > 0 ? 0 : null);
   };
-  // Drag-and-drop handlers
   const handleDrop = e => {
     e.preventDefault();
     setBulkDragOver(false);
@@ -251,6 +206,28 @@ export default function DataView() {
       handleBulkFiles(e.target.files);
     }
   };
+  const exportBulkFile = (fmt, file) => {
+    if (!file || !file.triples) return;
+    if (fmt === 'csv') {
+      const csv = file.triples.map(t => t.map(x => '"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      downloadBlob(blob, file.name.replace(/\.[^.]+$/, '') + '-triples.csv');
+    } else if (fmt === 'json') {
+      const blob = new Blob([JSON.stringify(file.triples, null, 2)], { type: 'application/json' });
+      downloadBlob(blob, file.name.replace(/\.[^.]+$/, '') + '-triples.json');
+    } else if (fmt === 'ttl') {
+      const turtle = file.triples.map(([s,p,o]) => `${escapeTurtle(s)} ${escapeTurtle(p)} ${escapeTurtle(o)} .`).join('\n');
+      const blob = new Blob([turtle], { type: 'text/turtle' });
+      downloadBlob(blob, file.name.replace(/\.[^.]+$/, '') + '-triples.ttl');
+    }
+  };
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 500);
+  }
   // JSON-LD advanced state
   const [jsonldExpanded, setJsonldExpanded] = useState(null);
   const [jsonldCompacted, setJsonldCompacted] = useState(null);
@@ -353,39 +330,63 @@ export default function DataView() {
     });
   }, []);
 
+
+  // --- react-table setup ---
+  // getSetting already declared at top; do not redeclare
+
   // When selectedType changes, update raw and graph
   // Get mappings from settings
-  // getSetting already declared above; do not redeclare
-  const csvMapping = (() => { try { return JSON.parse(getSetting('ext.osds.mapping.csv') || '{}'); } catch { return {}; } })();
-  const metaMapping = (() => { try { return JSON.parse(getSetting('ext.osds.mapping.meta') || '{}'); } catch { return {}; } })();
+  const csvMapping = useMemo(() => {
+    try {
+      return JSON.parse(getSetting('ext.osds.mapping.csv') || '{}');
+    } catch {
+      return {};
+    }
+  }, [getSetting('ext.osds.mapping.csv')]);
+
+  const metaMapping = useMemo(() => {
+    try {
+      return JSON.parse(getSetting('ext.osds.mapping.meta') || '{}');
+    } catch {
+      return {};
+    }
+  }, [getSetting('ext.osds.mapping.meta')]);
 
   useEffect(() => {
-    if (!selectedType) return;
-    const found = detectedTypes.find(t => t.key === selectedType);
-    if (found) {
-      setRaw(found.data);
-      const triples = normalizeTriples(selectedType, found.data, csvMapping, metaMapping);
-      setGraph(triplesToGraph(triples));
-      // JSON-LD advanced
-      if (selectedType === 'jsonld') {
-        (async () => {
-          try {
-            setJsonldExpanded(await jsonld.expand(found.data));
-          } catch (e) { setJsonldExpanded(null); }
-          try {
-            setJsonldCompacted(await jsonld.compact(found.data, found.data['@context'] || {}));
-          } catch (e) { setJsonldCompacted(null); }
-          setJsonldFramed(null);
-          try {
-            await jsonld.expand(found.data);
-            setJsonldValidation({ valid: true, warnings: [] });
-          } catch (e) {
-            setJsonldValidation({ valid: false, error: e.message });
-          }
-        })();
-      }
+    if (!selectedType || !raw) return;
+    const triples = normalizeTriples(selectedType, raw, csvMapping, metaMapping);
+    setGraph(prev => {
+      const newGraph = triplesToGraph(triples);
+      if (JSON.stringify(prev) !== JSON.stringify(newGraph)) return newGraph;
+      return prev;
+    });
+  }, [selectedType, raw, csvMapping, metaMapping]);
+
+  // Separate effect for JSON-LD advanced state
+  useEffect(() => {
+    let isMounted = true;
+    if (selectedType === 'jsonld' && raw) {
+      // Only reset jsonldFramed if not already null
+      if (jsonldFramed !== null) setJsonldFramed(null);
+      (async () => {
+        try {
+          const expanded = await jsonld.expand(raw);
+          if (isMounted) setJsonldExpanded(prev => JSON.stringify(prev) !== JSON.stringify(expanded) ? expanded : prev);
+        } catch (e) { if (isMounted) setJsonldExpanded(null); }
+        try {
+          const compacted = await jsonld.compact(raw, raw['@context'] || {});
+          if (isMounted) setJsonldCompacted(prev => JSON.stringify(prev) !== JSON.stringify(compacted) ? compacted : prev);
+        } catch (e) { if (isMounted) setJsonldCompacted(null); }
+        try {
+          await jsonld.expand(raw);
+          if (isMounted) setJsonldValidation({ valid: true, warnings: [] });
+        } catch (e) {
+          if (isMounted) setJsonldValidation({ valid: false, error: e.message });
+        }
+      })();
     }
-  }, [selectedType, detectedTypes, csvMapping, metaMapping]);
+    return () => { isMounted = false; };
+  }, [selectedType, raw]);
 
   const triples = useMemo(() => normalizeTriples(selectedType, raw, csvMapping, metaMapping), [selectedType, raw, csvMapping, metaMapping]);
   useEffect(() => { setTableData(triples); }, [triples]);
@@ -534,7 +535,7 @@ export default function DataView() {
   const toggle = key => setCollapsed(c => ({ ...c, [key]: !c[key] }));
 
   // --- react-table setup ---
-  const { get: getSetting } = useSettings ? useSettings() : { get: () => undefined };
+  // getSetting already declared at top; do not redeclare
   const [iriPreview, setIriPreview] = useState(null); // { iri, loading, contentType, text, error, triedProxy }
   const handleIriClick = async (iri, useProxy = false) => {
     setIriPreview({ iri, loading: true, triedProxy: useProxy });
@@ -609,7 +610,7 @@ export default function DataView() {
     setTableData(reordered);
   };
 
-  // --- Dialog handlers ---
+  // --- TripleDialog state/handlers ---
   const [editTriple, setEditTriple] = useState(["", "", ""]);
   const [editIndex, setEditIndex] = useState(null);
   const openDialog = (triple, idx) => {
@@ -640,18 +641,7 @@ export default function DataView() {
   };
 
   // --- Table rendering with TanStack Table ---
-  // Filtering UI for each column
-  function FilterInput({ column }) {
-    const columnFilterValue = column.getFilterValue() || '';
-    return (
-      <input
-        value={columnFilterValue}
-        onChange={e => column.setFilterValue(e.target.value)}
-        placeholder={t('filter', 'Filter...')}
-        style={{ width: '100%' }}
-      />
-    );
-  }
+  // ...existing code...
 
   // Helper: file type icon
   function getFileIcon(type) {
@@ -725,136 +715,155 @@ export default function DataView() {
     setShareToast(t('sharedToTwitter', 'Opened Twitter share'));
     setTimeout(() => setShareToast(''), 1800);
   };
-  const handleBookmark = () => {
-    // Placeholder: implement actual bookmarking logic (e.g., save to storage)
-    setShareToast(t('bookmarked', 'Bookmarked!'));
-    setTimeout(() => setShareToast(''), 1800);
+  const handleBookmark = async () => {
+    // Build Semantic Bookmark object (JSON-LD)
+    const now = new Date().toISOString();
+    // Try to get favicon
+    let favicon = '';
+    try {
+      const link = document.querySelector("link[rel~='icon']") || document.querySelector("link[rel='shortcut icon']");
+      if (link && link.href) {
+        favicon = link.href;
+      } else {
+        // Default to /favicon.ico
+        favicon = window.location.origin + '/favicon.ico';
+      }
+    } catch {}
+    const bookmark = {
+      "@context": "http://schema.org",
+      "@type": "Bookmark",
+      url: window.location.href,
+      name: document.title || window.location.href,
+      dateCreated: now,
+      creator: {
+        "@type": "Person",
+        name: (window.osdsUser && window.osdsUser.name) || "Anonymous"
+      },
+      image: favicon
+      // Optionally add: description, keywords, ratingValue, etc.
+    };
+    // Save to chrome.storage.local (or fallback to localStorage)
+    function onSuccess() {
+      setShareToast(t('bookmarked', 'Bookmarked!'));
+      setTimeout(() => setShareToast(''), 1800);
+    }
+    try {
+      if (window.chrome && chrome.storage && chrome.storage.local) {
+        chrome.storage.local.get({ semanticBookmarks: [] }, result => {
+          const bookmarks = Array.isArray(result.semanticBookmarks) ? result.semanticBookmarks : [];
+          bookmarks.push(bookmark);
+          chrome.storage.local.set({ semanticBookmarks: bookmarks }, onSuccess);
+        });
+      } else {
+        // Fallback: localStorage
+        const raw = localStorage.getItem('semanticBookmarks');
+        const bookmarks = raw ? JSON.parse(raw) : [];
+        bookmarks.push(bookmark);
+        localStorage.setItem('semanticBookmarks', JSON.stringify(bookmarks));
+        onSuccess();
+      }
+    } catch (e) {
+      setShareToast(t('bookmarkFailed', 'Bookmark failed'));
+      setTimeout(() => setShareToast(''), 1800);
+    }
   };
 
   return (
     <div className="osds-dataview" role="main" aria-label="Structured Data View">
-      {/* Social Sharing & Bookmarking */}
-      <div style={{display:'flex',gap:12,margin:'1em 0',alignItems:'center'}}>
-        <button className="osds-animated-btn osds-icon-anim" title={t('copyLink', 'Copy Link')} aria-label={t('copyLink', 'Copy Link')} onClick={handleShareCopy}>
-          <span role="img" aria-label="Copy">🔗</span>
-        </button>
-        <button className="osds-animated-btn osds-icon-anim" title={t('shareOnTwitter', 'Share on Twitter')} aria-label={t('shareOnTwitter', 'Share on Twitter')} onClick={handleShareTwitter}>
-          <span role="img" aria-label="Twitter">🐦</span>
-        </button>
-        <button className="osds-animated-btn osds-icon-anim" title={t('bookmark', 'Bookmark')} aria-label={t('bookmark', 'Bookmark')} onClick={handleBookmark}>
-          <span role="img" aria-label="Bookmark">🔖</span>
-        </button>
-        {shareToast && <div className="osds-toast" aria-live="polite">{shareToast}</div>}
-      </div>
-      {/* Rich Preview Card */}
-      {previewData && <div style={{margin:'1.5em 0'}}><RichPreview data={previewData} /></div>}
-      {/* RDF/XML Import UI */}
-      <div style={{marginBottom: '1em', background: '#f8f8ff', padding: '1em', borderRadius: 6, border: '1px solid #ccc'}}>
-        <label htmlFor="rdfxml-import" style={{fontWeight:'bold',marginRight:8}}>{t('importRdfXml', 'Import RDF/XML')}:</label>
-        <input id="rdfxml-import" type="file" accept=".rdf,.xml,application/rdf+xml" onChange={importRDFXML} />
-        <button onClick={clearRdfxmlImport} style={{marginLeft:8}} disabled={!rdfxmlImportTriples && rdfxmlImportErrors.length === 0}>{t('clear', 'Clear')}</button>
-        {rdfxmlImportErrors.length > 0 && (
-          <div style={{color:'red',marginTop:8}}>
-            <b>{t('importErrors', 'Import Errors')}:</b>
-            <button onClick={() => setRdfxmlImportShowErrors(v => !v)} style={{marginLeft:8}}>{rdfxmlImportShowErrors ? t('hideDetails', 'Hide Details') : t('showDetails', 'Show Details')}</button>
-            {rdfxmlImportShowErrors && (
-              <ul style={{margin:0,paddingLeft:18}}>
-                {rdfxmlImportErrors.map((err,i) => <li key={i}>{err.message}<br/>{err.context && err.context.error ? <span style={{fontSize:'0.9em',color:'#a00'}}>{err.context.error}</span> : null}</li>)}
-              </ul>
-            )}
-          </div>
-        )}
-        {rdfxmlImportTriples && (
-          <div style={{marginTop:8}}>
-            <b>{t('importedTriples', 'Imported Triples')}:</b>
-            <pre style={{background:'#eee',padding:'0.5em',borderRadius:4,maxHeight:200,overflow:'auto'}}>
-              {typeof rdfxmlImportTriples === 'string' ? rdfxmlImportTriples : JSON.stringify(rdfxmlImportTriples, null, 2)}
-            </pre>
-            <button onClick={addImportedTriplesToMain} style={{marginTop:8}}>{t('addToMainView', 'Add Imported Triples to Main View')}</button>
-          </div>
-        )}
-      </div>
-
-      {/* Performance Stats Section */}
-      <div className="osds-section" role="region" aria-labelledby="perf-heading">
-        <div
-          className="osds-section-header"
-          id="perf-heading"
-          tabIndex={0}
-          role="button"
-          aria-expanded={!collapsed.perf}
-          aria-controls="perf-section-body"
-          onClick={() => toggle('perf')}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle('perf'); } }}
-          style={{cursor:'pointer',display:'flex',alignItems:'center'}}
-        >
-          <span style={{fontWeight:'bold',fontSize:'1.1em'}}>{t('performanceStats', 'Performance Stats')}</span>
-          <span style={{marginLeft:'auto'}}>{collapsed.perf ? '▶' : '▼'}</span>
+      <Tabs
+        tabs={[{ key: 'url', label: t('urlParser', 'URL Parser') }, { key: 'data', label: t('dataView', 'Data View') }]}
+        activeKey={tab}
+        onSelect={setTab}
+      />
+      {tab === 'url' && (
+        <div className="p-3">
+          <UrlInput
+            fetchUrl={fetchUrl}
+            setFetchUrl={setFetchUrl}
+            fetchLoading={fetchLoading}
+            fetchError={fetchError}
+            onParse={handleFetchUrl}
+            t={t}
+          />
         </div>
-        {!collapsed.perf && (
-          <div className="osds-section-body" id="perf-section-body" style={{background:'#222',color:'#eee',padding:'1em',borderRadius:'6px',marginTop:'0.5em'}}>
-            <table style={{width:'100%',color:'#fff',background:'none',borderCollapse:'collapse',fontSize:'0.98em'}}>
-              <thead>
-                <tr style={{borderBottom:'1px solid #444'}}>
-                  <th style={{textAlign:'left',padding:'0.3em 0.7em'}}>{t('type', 'Type')}</th>
-                  <th style={{textAlign:'right',padding:'0.3em 0.7em'}}>{t('fetchParseMs', 'Fetch+Parse (ms)')}</th>
-                  <th style={{textAlign:'right',padding:'0.3em 0.7em'}}>{t('normalizeMs', 'Normalize (ms)')}</th>
-                  <th style={{textAlign:'right',padding:'0.3em 0.7em'}}>{t('totalMs', 'Total (ms)')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(perfStats).map(([key, stat]) => (
-                  <tr key={key} style={{borderBottom:'1px solid #333'}}>
-                    <td style={{padding:'0.3em 0.7em'}}>{key}</td>
-                    <td style={{textAlign:'right',padding:'0.3em 0.7em'}}>{stat.fetchMs.toFixed(1)}</td>
-                    <td style={{textAlign:'right',padding:'0.3em 0.7em'}}>{stat.normalizeMs.toFixed(1)}</td>
-                    <td style={{textAlign:'right',padding:'0.3em 0.7em'}}>{stat.totalMs.toFixed(1)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div style={{marginTop:'0.7em',fontSize:'0.95em',color:'#aaa'}}>
-              <b>{t('note', 'Note')}:</b> {t('timingNote', 'Times are measured in milliseconds for each data type (fetch/parse, normalization, total). Includes network and JS parsing overhead.')}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Raw API/Code View Section */}
-      <div className="osds-section" role="region" aria-labelledby="code-heading">
-        <div
-          className="osds-section-header"
-          id="code-heading"
-          tabIndex={0}
-          role="button"
-          aria-expanded={!collapsed.code}
-          aria-controls="code-section-body"
-          onClick={() => toggle('code')}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle('code'); } }}
-          style={{cursor:'pointer',display:'flex',alignItems:'center'}}
-        >
-          <span style={{fontWeight:'bold',fontSize:'1.1em'}}>{t('rawApiCodeView', 'Raw API / Code View')}</span>
-          <span style={{marginLeft:'auto'}}>{collapsed.code ? '▶' : '▼'}</span>
-        </div>
-        {!collapsed.code && (
-          <div className="osds-section-body" id="code-section-body" style={{background:'#222',color:'#eee',padding:'1em',borderRadius:'6px',marginTop:'0.5em'}}>
-            <div style={{marginBottom:'0.5em',display:'flex',gap:'0.5em'}}>
-              <button className="osds-animated-btn" onClick={() => handleCopyCode('json')} aria-label={t('copyAsJson', 'Copy as JSON')}>{t('copyAsJson', 'Copy as JSON')}</button>
-              <button className="osds-animated-btn" onClick={() => handleCopyCode('triples')} aria-label={t('copyAsTriples', 'Copy as Triples')}>{t('copyAsTriples', 'Copy as Triples')}</button>
-              <button className="osds-animated-btn" onClick={() => handleCopyCode('turtle')} aria-label={t('copyAsTurtle', 'Copy as Turtle')}>{t('copyAsTurtle', 'Copy as Turtle')}</button>
-              {codeCopyMsg && <div className="osds-toast" aria-live="polite">{codeCopyMsg}</div>}
-            </div>
-            <pre style={{maxHeight:'320px',overflow:'auto',background:'#181818',color:'#fff',padding:'1em',borderRadius:'4px',fontSize:'0.95em'}} aria-label="Raw JSON code block">
-{JSON.stringify(raw, null, 2)}
-            </pre>
-            <div style={{marginTop:'1em',fontSize:'0.95em',color:'#aaa'}}>
-              <b>{t('forLlmsAdvanced', 'For LLMs/Advanced')}:</b> {t('llmInstructions', 'Use the above JSON as input, or request triples (tab-separated) or Turtle serialization.')} <br/>
-              <b>{t('programmaticAccess', 'Programmatic access')}:</b> {t('programmaticInstructions', 'Use')} <code>window.osdsData</code> {t('programmaticInstructions2', 'in the console for the current structured data object.')}
-            </div>
-          </div>
-        )}
-      </div>
-      {/* ...rest of existing UI... */}
+      )}
+      {tab === 'data' && (
+        <>
+          <BulkFileManager
+            bulkFiles={bulkFiles}
+            bulkActiveIdx={bulkActiveIdx}
+            bulkDragOver={bulkDragOver}
+            bulkPreviewOpen={bulkPreviewOpen}
+            handleBulkFiles={handleBulkFiles}
+            handleDrop={handleDrop}
+            handleDragOver={handleDragOver}
+            handleDragLeave={handleDragLeave}
+            handleFileInput={handleFileInput}
+            setBulkActiveIdx={setBulkActiveIdx}
+            setBulkPreviewOpen={setBulkPreviewOpen}
+            exportBulkFile={exportBulkFile}
+            t={t}
+          />
+          <TypeSelector
+            detectedTypes={detectedTypes}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+            t={t}
+          />
+          <TriplesTable
+            table={table}
+            columns={columns}
+            t={t}
+            isDark={isDark}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onDialog={openDialog}
+            FilterInput={FilterInput}
+          />
+          <ShareControls
+            t={t}
+            handleShareCopy={handleShareCopy}
+            handleShareTwitter={handleShareTwitter}
+            handleBookmark={handleBookmark}
+            shareToast={shareToast}
+          />
+          <RichPreviewCard data={previewData} />
+          <RdfXmlImportExport
+            t={t}
+            importRDFXML={importRDFXML}
+            clearRdfxmlImport={clearRdfxmlImport}
+            rdfxmlImportTriples={rdfxmlImportTriples}
+            rdfxmlImportErrors={rdfxmlImportErrors}
+            rdfxmlImportShowErrors={rdfxmlImportShowErrors}
+            setRdfxmlImportShowErrors={setRdfxmlImportShowErrors}
+            addImportedTriplesToMain={addImportedTriplesToMain}
+          />
+          <PerfStats
+            perfStats={perfStats}
+            collapsed={collapsed}
+            toggle={toggle}
+            t={t}
+          />
+          <RawDataView
+            raw={raw}
+            collapsed={collapsed}
+            toggle={toggle}
+            t={t}
+            codeCopyMsg={codeCopyMsg}
+            handleCopyCode={handleCopyCode}
+          />
+          <TripleDialog
+            show={showDialog}
+            triple={dialogTriple}
+            editTriple={editTriple}
+            onEditChange={handleEditChange}
+            onSave={handleSave}
+            onDelete={handleDelete}
+            onClose={closeDialog}
+            t={t}
+          />
+        </>
+      )}
     </div>
   );
 }

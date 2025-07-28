@@ -1,5 +1,5 @@
 
-# OpenLink Structured Data Sniffer
+# SemWeb Companion
 
 A browser extension that reveals structured metadata (Microdata, RDFa, JSON-LD, Turtle, etc.) embedded within HTML documents. Modernized with React, TypeScript, and advanced data visualization.
 

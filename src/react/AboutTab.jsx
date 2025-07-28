@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { FaGlobe } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 
@@ -7,7 +8,7 @@ export default function AboutTab() {
   const { t } = useTranslation();
   return (
     <div className="about-tab p-4" role="region" aria-labelledby="about-heading">
-      <img alt="OpenLink Structured Data Sniffer icon" src="../images/icon48.png" style={{ width: 48, height: 48 }} />
+  <FaGlobe size={48} style={{ marginRight: 8, verticalAlign: 'middle' }} title="SemWeb Companion icon" />
       <h3 id="about-heading">{t('about')}</h3>
       <p id="ext_ver">{t('version')} 0.0.0</p>
       <p>

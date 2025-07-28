@@ -5,16 +5,18 @@
     "schema": "http://schema.org/",
     "osds": "https://github.com/OpenLinkSoftware/OSDS_extension#"
   },
-  "@id": "osds:StructuredDataSniffer",
+  "@id": "osds:SemanticWebCompanion",
   "@type": ["schema:SoftwareApplication", "foaf:Project"],
-  "schema:name": "OpenLink Structured Data Sniffer",
-  "schema:description": "A browser extension that reveals and visualizes structured metadata (Microdata, RDFa, JSON-LD, Turtle, etc.) embedded within HTML documents. Modernized with React, TypeScript, and advanced data visualization.",
+  "schema:name": "Semantic Web Companion",
+  "schema:description": "Semantic Web Companion is a modern, extensible tool for exploring, visualizing, and working with structured data on the web. It is a comprehensive refactor and evolution of the Openlink Structured Data Sniffer (OSDS), providing a React-based, user-friendly interface and advanced features for the semantic web community.",
   "schema:featureList": [
     "Detects and visualizes Microdata, JSON-LD, Turtle, RDFa, RDF/XML, POSH, JSON, and CSV",
     "Interactive graph and table views (React Flow)",
+    "Extensible AI agent and LLM integration",
     "Accessible, internationalized UI",
     "Settings sync via browser storage",
-    "Automated tests and CI"
+    "Automated tests and CI",
+    "Refactored from Openlink Structured Data Sniffer (OSDS)"
   ],
   "schema:license": {
     "@id": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
@@ -24,7 +26,7 @@
     "@id": "https://www.openlinksw.com/",
     "foaf:name": "OpenLink Software"
   },
-  "schema:softwareVersion": "2025.07.27",
+  "schema:softwareVersion": "2025.07.28",
   "schema:url": "https://github.com/OpenLinkSoftware/OSDS_extension",
-  "schema:dateModified": "2025-07-27"
+  "schema:dateModified": "2025-07-28"
 }

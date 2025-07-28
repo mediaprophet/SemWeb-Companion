@@ -107,15 +107,52 @@ function SparqlTab() {
         </div>
         <div className="mb-3">
           <label htmlFor="sparql-query" className="form-label">SPARQL Query:</label>
-          <textarea
-            id="sparql-query"
-            className="form-control"
-            style={{ width: '100%', height: 220, whiteSpace: 'nowrap' }}
-            value={query}
-            onChange={e => { setQuery(e.target.value); set('ext.osds.sparql.query', e.target.value); }}
-            aria-label={t('sparqlEndpoint') + ' Query'}
-            aria-required="false"
-          />
+          <div style={{ display: 'flex', position: 'relative', width: '100%' }}>
+            <pre
+              aria-hidden="true"
+              style={{
+                userSelect: 'none',
+                margin: 0,
+                padding: '8px 0 8px 8px',
+                background: '#f8f9fa',
+                color: '#888',
+                border: '1px solid #ced4da',
+                borderRight: 'none',
+                borderRadius: '0.375rem 0 0 0.375rem',
+                fontSize: 14,
+                minWidth: 32,
+                textAlign: 'right',
+                height: 220,
+                overflow: 'hidden',
+                lineHeight: '1.5',
+                fontFamily: 'monospace',
+                zIndex: 1
+              }}
+            >
+              {query.split('\n').map((_, i) => (i + 1)).join('\n')}
+            </pre>
+            <textarea
+              id="sparql-query"
+              className="form-control"
+              style={{
+                width: '100%',
+                height: 220,
+                whiteSpace: 'pre',
+                fontFamily: 'monospace',
+                fontSize: 14,
+                paddingLeft: 40,
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                background: 'transparent',
+                zIndex: 2
+              }}
+              value={query}
+              onChange={e => { setQuery(e.target.value); set('ext.osds.sparql.query', e.target.value); }}
+              aria-label={t('sparqlEndpoint') + ' Query'}
+              aria-required="false"
+            />
+          </div>
         </div>
         <button className="btn btn-primary btn-sm me-2" type="button" onClick={handleRunQuery} aria-label={t('runQuery')} disabled={loading}>
           {loading ? t('running', 'Running...') : t('runQuery', 'Run Query')}

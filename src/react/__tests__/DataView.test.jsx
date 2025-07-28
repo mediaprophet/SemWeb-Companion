@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import DataView from '../DataView.jsx';
+import DataView from '../data-view/DataView.jsx';
 
 describe('DataView', () => {
   it('renders and switches views', async () => {

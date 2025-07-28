@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Structured Data Sniffer (Community Fork)",
+  "name": "SemWeb Companion",
   "short_name": "SDS Fork",
   "version": "3.0.0.1",
-  "description": "Explore, preview, and export all structured data (JSON-LD, Microdata, RDFa, Turtle, CSV, and more) embedded in web pages. Designed for the Web of Data and Social Web, with rich previews, sharing, accessibility, and developer tools.",
-  "author": "Structured Data Sniffer Community",
-  "homepage_url": "https://github.com/mediaprophet/structured-data-sniffer",
+  "description": "Explore, preview, and export all semantic and linked data (JSON-LD, Microdata, RDFa, Turtle, CSV, and more) embedded in web pages. Designed for the Semantic Web and Social Web, with rich previews, sharing, accessibility, and developer tools.",
+  "author": "SemWeb Companion Community",
+  "homepage_url": "https://github.com/mediaprophet/semweb-companion",
   "minimum_chrome_version": "88",
   "icons": {
     "16": "images/icon16.png",
