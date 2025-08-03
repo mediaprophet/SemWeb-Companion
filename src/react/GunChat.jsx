@@ -1,12 +1,29 @@
-import Gun from 'gun';
+
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import Gun from 'gun';
 
 // Simple Gun chat component for demo
-export default function GunChat({ userId }) {
+
+
+export default function GunChat({ userId: propUserId }) {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [userId, setUserId] = useState(propUserId || 'anon');
   const gun = useRef(null);
   const chatRoom = 'semweb-companion-global';
+
+  // Try to get Chrome Identity user info on mount
+  useEffect(() => {
+    if (window.chrome && chrome.identity && chrome.identity.getProfileUserInfo) {
+      chrome.identity.getProfileUserInfo((userInfo) => {
+        if (userInfo && userInfo.email) {
+          setUserId(userInfo.email);
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
     gun.current = Gun(['https://gun.eco/gun', 'https://gunjs.herokuapp.com/gun']);
@@ -46,10 +63,10 @@ export default function GunChat({ userId }) {
         value={input}
         onChange={e => setInput(e.target.value)}
         onKeyDown={e => e.key === 'Enter' && sendMessage()}
-        placeholder="Type a message..."
+        placeholder={t('typeAMessage', 'Type a message...')}
         style={{ width: '75%', marginRight: 4 }}
       />
-      <button className="btn btn-sm btn-primary" onClick={sendMessage}>Send</button>
+      <button className="btn btn-sm btn-primary" onClick={sendMessage}>{t('send', 'Send')}</button>
     </div>
   );
 }

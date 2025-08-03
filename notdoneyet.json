@@ -1,0 +1,22 @@
+[
+  {
+    "file": "src/react/SettingsTab.jsx",
+    "line": 20,
+    "note": "Reset to defaults (not yet implemented)"
+  },
+  {
+    "file": "src/react/data-view/DataView.jsx",
+    "lines": [108,113,118,143,147,152,157,161,183,332],
+    "note": "TODOs for data loading, filtering, editing, deleting, dialog, and metadata extraction"
+  },
+  {
+    "file": "src/react/Popup.jsx",
+    "line": 201,
+    "note": "Future: Add more login options here"
+  },
+  {
+    "file": "src/utils/parsers.js",
+    "line": 361,
+    "note": "TODO: Detect language tag if present in CSV"
+  }
+]

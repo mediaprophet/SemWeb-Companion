@@ -16,8 +16,12 @@ import { useEffect } from 'react';
 // ...existing code...
 function SettingsTab(props) {
 	// Reset to Defaults handler (stub)
+	import { useSettings } from './SettingsContext.jsx';
+	// ...existing code...
 	function handleReset() {
-		alert('Reset to defaults (not yet implemented)');
+		const { reset } = useSettings();
+		reset();
+		alert('Settings have been reset to defaults.');
 	}
 	// AboutTab fallback (not yet modularized)
 	const AboutTab = null;

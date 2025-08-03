@@ -104,18 +104,31 @@ export default function DataView() {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
+  // Load initial data (example: fetch from localStorage or API)
   useEffect(() => {
-    // TODO: Load initial data here or via props
+    // Example: load triples from localStorage (or replace with API call)
+    const stored = localStorage.getItem('triples');
+    if (stored) {
+      try {
+        setTriples(JSON.parse(stored));
+      } catch {}
+    }
   }, []);
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
-    // TODO: Filter triples based on selected type
+    // Filter triples based on selected type
+    setFilteredTriples(triples.filter(triple => triple.type === type));
   };
 
   const handleFilterChange = (text) => {
     setFilterText(text);
-    // TODO: Implement filtering logic
+    // Filter triples by subject, predicate, or object
+    setFilteredTriples(triples.filter(triple =>
+      triple.subject.includes(text) ||
+      triple.predicate.includes(text) ||
+      triple.object.includes(text)
+    ));
   };
 
   const handleImportExportToggle = () => {
@@ -140,25 +153,31 @@ export default function DataView() {
   };
 
   const handleBookmark = () => {
-    // TODO: Implement bookmark logic
+    // Save current triples as bookmarks in localStorage
+    localStorage.setItem('bookmarkedTriples', JSON.stringify(triples));
+    setBookmarkUrl(window.location.href);
+    setCopySuccess('Triples bookmarked!');
   };
 
   const handleRowClick = (row) => {
-    // TODO: Handle row click, possibly open dialog to edit triple
+    setTripleToEdit(row.original);
+    setShowingTripleDialog(true);
   };
 
   // Add handleEdit, handleDelete, openDialog stubs to fix ReferenceError
   const handleEdit = (rowIdx) => {
-    // TODO: Implement edit logic
     setTripleToEdit(triples[rowIdx]);
     setShowingTripleDialog(true);
   };
   const handleDelete = (rowIdx) => {
-    // TODO: Implement delete logic
-    setTriples(triples => triples.filter((_, idx) => idx !== rowIdx));
+    // Remove triple at rowIdx
+    setTriples(triples => {
+      const updated = triples.filter((_, idx) => idx !== rowIdx);
+      localStorage.setItem('triples', JSON.stringify(updated));
+      return updated;
+    });
   };
   const openDialog = (rowIdx) => {
-    // TODO: Implement dialog logic
     setTripleToEdit(triples[rowIdx]);
     setShowingTripleDialog(true);
   };
@@ -180,7 +199,20 @@ export default function DataView() {
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const html = await resp.text();
       setFetchedHtml(html);
-      // TODO: Call metadata extraction here
+      // Extract triples from HTML (very basic example)
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const triples = [];
+      // Example: extract <meta property="og:..." content="..."> as triples
+      Array.from(doc.querySelectorAll('meta[property^="og:"]')).forEach(el => {
+        triples.push({
+          subject: url,
+          predicate: el.getAttribute('property'),
+          object: el.getAttribute('content'),
+          type: 'opengraph'
+        });
+      });
+      setTriples(triples);
+      setFilteredTriples(triples);
     } catch (err) {
       setFetchError(err.message);
     } finally {
@@ -329,7 +361,24 @@ export default function DataView() {
           onClose={() => setShowingTripleDialog(false)}
           triple={tripleToEdit}
           onSave={(newTriple) => {
-            // TODO: Handle triple save
+            setTriples(triples => {
+              // If editing, replace the triple, else add new
+              if (tripleToEdit) {
+                const idx = triples.findIndex(t => t === tripleToEdit);
+                if (idx !== -1) {
+                  const updated = [...triples];
+                  updated[idx] = newTriple;
+                  localStorage.setItem('triples', JSON.stringify(updated));
+                  setFilteredTriples(updated.filter(triple => triple.type === selectedType));
+                  return updated;
+                }
+              }
+              const updated = [...triples, newTriple];
+              localStorage.setItem('triples', JSON.stringify(updated));
+              setFilteredTriples(updated.filter(triple => triple.type === selectedType));
+              return updated;
+            });
+            setShowingTripleDialog(false);
           }}
         />
       )}
@@ -343,10 +392,48 @@ export default function DataView() {
         t={t}
       />
       {/* Display extracted metadata */}
-      {jsonldBlocks.length > 0 && (
+      {/* Schema.org JSON-LD blocks */}
+      {jsonldBlocks.filter(b => {
+        const ctx = b && b['@context'];
+        if (!ctx) return false;
+        if (typeof ctx === 'string') return ctx.includes('schema.org');
+        if (Array.isArray(ctx)) return ctx.some(c => typeof c === 'string' && c.includes('schema.org'));
+        if (typeof ctx === 'object' && ctx['@vocab']) return String(ctx['@vocab']).includes('schema.org');
+        return false;
+      }).length > 0 && (
+        <div style={{margin:'1em 0'}}>
+          <h5>Schema.org</h5>
+          {jsonldBlocks.filter(b => {
+            const ctx = b && b['@context'];
+            if (!ctx) return false;
+            if (typeof ctx === 'string') return ctx.includes('schema.org');
+            if (Array.isArray(ctx)) return ctx.some(c => typeof c === 'string' && c.includes('schema.org'));
+            if (typeof ctx === 'object' && ctx['@vocab']) return String(ctx['@vocab']).includes('schema.org');
+            return false;
+          }).map((block, i) => (
+            <pre key={i} style={{background:'#222',color:'#fff',padding:'0.7em',borderRadius:'6px',marginBottom:'0.5em'}}>{JSON.stringify(block, null, 2)}</pre>
+          ))}
+        </div>
+      )}
+      {/* Other JSON-LD blocks */}
+      {jsonldBlocks.filter(b => {
+        const ctx = b && b['@context'];
+        if (!ctx) return true;
+        if (typeof ctx === 'string') return !ctx.includes('schema.org');
+        if (Array.isArray(ctx)) return !ctx.some(c => typeof c === 'string' && c.includes('schema.org'));
+        if (typeof ctx === 'object' && ctx['@vocab']) return !String(ctx['@vocab']).includes('schema.org');
+        return true;
+      }).length > 0 && (
         <div style={{margin:'1em 0'}}>
           <h5>JSON-LD</h5>
-          {jsonldBlocks.map((block, i) => (
+          {jsonldBlocks.filter(b => {
+            const ctx = b && b['@context'];
+            if (!ctx) return true;
+            if (typeof ctx === 'string') return !ctx.includes('schema.org');
+            if (Array.isArray(ctx)) return !ctx.some(c => typeof c === 'string' && c.includes('schema.org'));
+            if (typeof ctx === 'object' && ctx['@vocab']) return !String(ctx['@vocab']).includes('schema.org');
+            return true;
+          }).map((block, i) => (
             <pre key={i} style={{background:'#222',color:'#fff',padding:'0.7em',borderRadius:'6px',marginBottom:'0.5em'}}>{JSON.stringify(block, null, 2)}</pre>
           ))}
         </div>

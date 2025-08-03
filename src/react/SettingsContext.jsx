@@ -120,8 +120,21 @@ export function SettingsProvider({ children }) {
     }
   }, []);
 
+  // Default values for all settings keys
+  const defaultValues = Object.fromEntries(keys.map(key => [key, settings.getDefaultValue ? settings.getDefaultValue(key) : undefined]));
+
+  // Reset all settings to default values
+  const reset = useCallback(() => {
+    setState({ ...defaultValues });
+    if (window.chrome && chrome.storage && chrome.storage.sync) {
+      chrome.storage.sync.set({ ...defaultValues });
+    }
+    // Also update legacy Settings
+    keys.forEach(key => settings.setValue(key, defaultValues[key]));
+  }, []);
+
   // Expose context value
-  const value = { state, get, set };
+  const value = { state, get, set, reset };
 
   return (
     <SettingsContext.Provider value={value}>

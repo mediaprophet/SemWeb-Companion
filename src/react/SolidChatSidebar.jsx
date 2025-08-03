@@ -1,5 +1,6 @@
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useSolidAuth } from './solid/SolidAuthProvider.jsx';
 import { useTranslation } from 'react-i18next';
 
 // Utility: Parse Turtle chat file into message objects (very basic RDF parser for MVP)

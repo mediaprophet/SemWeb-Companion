@@ -1,3 +1,18 @@
+// fallbackFetch: fallback loader for structured data types if content script messaging fails
+async function fallbackFetch(typeKey) {
+  // You can expand this with real fetches or local samples if needed
+  // For now, return an empty object or a stub for known types
+  switch (typeKey) {
+    case 'jsonld':
+      return {};
+    case 'openGraph':
+      return {};
+    case 'twitter':
+      return {};
+    default:
+      return {};
+  }
+}
 import PerfStats from './data-view/PerfStats.jsx';
 import ShareControls from './data-view/ShareControls.jsx';
 import RawDataView from './RawDataView.jsx';
@@ -652,21 +667,6 @@ export default function DataView() {
       case 'rdfxml': return '🟪';
       case 'posh': return '🟧';
       default: return '📄';
-    }
-  }
-  function exportBulkFile(fmt, file) {
-    if (!file || !file.triples) return;
-    if (fmt === 'csv') {
-      const csv = file.triples.map(t => t.map(x => '"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv' });
-      downloadBlob(blob, file.name.replace(/\.[^.]+$/, '') + '-triples.csv');
-    } else if (fmt === 'json') {
-      const blob = new Blob([JSON.stringify(file.triples, null, 2)], { type: 'application/json' });
-      downloadBlob(blob, file.name.replace(/\.[^.]+$/, '') + '-triples.json');
-    } else if (fmt === 'ttl') {
-      const turtle = file.triples.map(([s,p,o]) => `${escapeTurtle(s)} ${escapeTurtle(p)} ${escapeTurtle(o)} .`).join('\n');
-      const blob = new Blob([turtle], { type: 'text/turtle' });
-      downloadBlob(blob, file.name.replace(/\.[^.]+$/, '') + '-triples.ttl');
     }
   }
   function downloadBlob(blob, filename) {

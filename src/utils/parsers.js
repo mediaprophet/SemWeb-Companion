@@ -352,14 +352,22 @@ export async function parseCSV(textData, baseURL, bnodeTypes) {
           ttl += `:${col[i]} a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .\n`;
         }
         ttl += '\n';
+        // Detect language column index if present
+        const langColIdx = col.findIndex(c => c.toLowerCase() === 'lang' || c.toLowerCase() === 'language');
         for (let i = 1; i < res.data.length; i++) {
           const d = res.data[i];
           let s = '[\n';
           for (let j = 0; j < d.length; j++) {
             let val = d[j] ? '' + d[j] : '';
             let qv = '"';
-            let lang = undefined; // TODO: Detect language tag if present in CSV
+            let lang = undefined;
             let datatype = 'http://www.w3.org/2001/XMLSchema#string'; // Default datatype
+            // If this column is a language column, skip adding as triple value
+            if (j === langColIdx) continue;
+            // Try to get language tag from row if present
+            if (langColIdx !== -1 && d[langColIdx]) {
+              lang = d[langColIdx];
+            }
             if (val.indexOf && (val.indexOf("\n") !== -1 || val.indexOf("\r") !== -1)) {
               qv = "'''";
               val = val.replace(/\\/g, '\\\\').replace(/\"/g, "\\\"");

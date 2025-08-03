@@ -17,6 +17,7 @@
     "default_title": "Show Document Metadata",
     "default_popup": "popup.html"
   },
+  "options_page": "index.html",
   "background": {
     "service_worker": "background.js"
   },
@@ -58,6 +59,11 @@
     {
       "matches": ["<all_urls>"],
       "js": ["content-script.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-graph-overlay.js"],
       "run_at": "document_idle"
     }
   ],

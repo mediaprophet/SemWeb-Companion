@@ -1,0 +1,20 @@
+[
+  "old_build.js",
+  "old_modules.zip",
+  "old-version_osds.zip",
+  "example.txt",
+  "move-images-to-public.js",
+  "ollamaapi.md",
+  "prepare_chrome.sh",
+  "prepare_ff.sh",
+  "status.json",
+  "src/manifest.json.ff",
+  "src/react/test/",
+  "src/react/common/",
+  "src/react/data-view/utils/",
+  "src/react/data-view/__tests__",
+  "src/react/__tests__",
+  "src/react/public/", 
+  "src/react/sidebar-dark.css",
+  "src/react/osds-animations.css" 
+]

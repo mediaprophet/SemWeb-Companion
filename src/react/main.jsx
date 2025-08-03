@@ -16,7 +16,7 @@ import { SettingsProvider } from './SettingsContext.jsx';
 import Popup from './Popup.jsx';
 import SolidAuthProvider from './solid/SolidAuthProvider.jsx';
 
-const container = document.getElementById('react-root');
+const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
 	<SettingsProvider>

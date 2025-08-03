@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './osds-animations.css';
+import './sidebar-dark.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import SidePanel from './SidePanel.jsx';

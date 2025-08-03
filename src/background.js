@@ -26,13 +26,25 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: 'open-side-panel',
     title: 'Open SemWeb Companion Side Panel',
-    contexts: ['all']
+    contexts: ['action']
   });
   // Add context menu item for creating semantic annotation from selection
   chrome.contextMenus.create({
     id: 'create-semantic-annotation',
     title: 'Create Semantic Annotation',
     contexts: ['selection']
+  });
+  // Add context menu item for settings
+  chrome.contextMenus.create({
+    id: 'open-settings',
+    title: 'Open Settings',
+    contexts: ['action']
+  });
+  // Add context menu item for background page
+  chrome.contextMenus.create({
+    id: 'open-background',
+    title: 'Open Background Page',
+    contexts: ['action']
   });
   // Enable side panel for all tabs by default
   if (chrome.sidePanel && chrome.sidePanel.setOptions) {
@@ -67,6 +79,10 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     } else {
       chrome.tabs.create({ url: chrome.runtime.getURL('sidebar.html') });
     }
+  } else if (info.menuItemId === 'open-settings') {
+    chrome.tabs.create({ url: chrome.runtime.getURL('react/index.html') });
+  } else if (info.menuItemId === 'open-background') {
+    chrome.tabs.create({ url: 'chrome://extensions/?id=' + chrome.runtime.id });
   } else if (info.menuItemId === 'create-semantic-annotation' && info.selectionText) {
     // Send message to content script to create annotation with selected text
     chrome.tabs.sendMessage(tab.id, {

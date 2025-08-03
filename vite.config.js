@@ -13,6 +13,7 @@ export default defineConfig({
         main: resolve(__dirname, 'src/react/index.html'),
         sidebar: resolve(__dirname, 'src/react/sidebar.html'),
         popup: resolve(__dirname, 'src/react/popup.html'),
+        settings: resolve(__dirname, 'src/react/settings.html'),
       },
       output: {
         entryFileNames: 'assets/[name].js',

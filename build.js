@@ -62,7 +62,18 @@ function getManifestReplacements(target) {
       ]),
       options_page: 'index.html',
       options_ui: 'null',
-      content_scripts: 'null',
+      content_scripts: JSON.stringify([
+        {
+          matches: ["<all_urls>"],
+          js: ["content-script.js"],
+          run_at: "document_idle"
+        },
+        {
+          matches: ["<all_urls>"],
+          js: ["content-graph-overlay.js"],
+          run_at: "document_idle"
+        }
+      ]),
       content_security_policy: JSON.stringify({
         extension_pages: "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://solid.openlinksw.com; media-src 'self';"
       }),
@@ -148,9 +159,9 @@ for (const file of extraFiles) {
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(distDir, file));
 }
 
-// 6. Copy popup.js, background.js, and content-script.js if present (after all other build steps)
+// 6. Copy popup.js, background.js, content-script.js, and content-graph-overlay.js if present (after all other build steps)
 (() => {
-  const extraScripts = ['popup.js', 'background.js', 'content-script.js'];
+  const extraScripts = ['popup.js', 'background.js', 'content-script.js', 'content-graph-overlay.js'];
   for (const script of extraScripts) {
     const src = path.resolve(__dirname, 'src', script);
     if (fs.existsSync(src)) {
